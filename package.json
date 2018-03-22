@@ -1,0 +1,21 @@
+{
+  "name": "react-dip",
+  "version": "0.0.1",
+  "description":
+    "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mdugue/react-dip.git"
+  },
+  "keywords": ["react", "UI", "UX"],
+  "author": "Manuel Dugue <post@manueldugue.de> (https://manueldugue.de)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mdugue/react-dip/issues"
+  },
+  "homepage": "https://github.com/mdugue/react-dip#readme"
+}
