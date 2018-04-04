@@ -1,20 +1,27 @@
 {
   "name": "react-dip",
   "version": "0.0.2",
-  "description": "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
+  "description":
+    "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
   "main": "dist/react-dip.cjs.js",
   "module": "dist/react-dip.esm.js",
   "jsnext:main": "dist/react-dip.esm.js",
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "build:kcd": "kcd-scripts build",
-    "build": "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",
-    "build:commonjs": "npm run clean:commonjs && cross-env NODE_ENV=commonjs babel source --out-dir dist/commonjs",
+    "build":
+      "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",
+    "build:commonjs":
+      "npm run clean:commonjs && cross-env NODE_ENV=commonjs babel source --out-dir dist/commonjs",
     "build:css": "postcss source/styles.css -o styles.css --use autoprefixer",
-    "build:demo": "npm run clean:demo && cross-env NODE_ENV=production webpack --config webpack.config.demo.js -p --bail",
-    "build:es": "npm run clean:es && cross-env NODE_ENV=es babel src --out-dir dist/es",
-    "build:umd": "npm run clean:umd && cross-env NODE_ENV=production webpack --config webpack.config.umd.js --bail",
-    "clean": "npm run clean:commonjs && npm run clean:demo && npm run clean:es && npm run clean:umd",
+    "build:demo":
+      "npm run clean:demo && cross-env NODE_ENV=production webpack --config webpack.config.demo.js -p --bail",
+    "build:es":
+      "npm run clean:es && cross-env NODE_ENV=es babel src --out-dir dist/es",
+    "build:umd":
+      "npm run clean:umd && cross-env NODE_ENV=production webpack --config webpack.config.umd.js --bail",
+    "clean":
+      "npm run clean:commonjs && npm run clean:demo && npm run clean:es && npm run clean:umd",
     "clean:commonjs": "rimraf dist/commonjs",
     "clean:demo": "rimraf build",
     "clean:es": "rimraf dist/es",
@@ -34,6 +41,7 @@
   "homepage": "https://github.com/mdugue/react-dip#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-jest": "^22.4.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
@@ -42,12 +50,15 @@
     "babel-preset-react": "^6.24.1",
     "cross-env": "^5.1.4",
     "flow-bin": "^0.68.0",
+    "jest": "^22.4.3",
     "kcd-scripts": "^0.36.1",
+    "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.2"
   },
   "dependencies": {},
   "peerDependencies": {
     "react": "^16.3.0-alpha.2",
     "react-dom": "^16.3.0-alpha.2"
-  }
+  },
+  "jest": { "rootDir": "./src/" }
 }
