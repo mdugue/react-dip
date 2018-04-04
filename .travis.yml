@@ -10,5 +10,3 @@ notifications:
   slack: react-dip:Z6Jf26OaXQgan2qcilZz3NjY
 install: npm install
 after_success: kcd-scripts travis-after-success
-branches:
-  only: master
