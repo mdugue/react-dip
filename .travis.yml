@@ -1,0 +1,13 @@
+sudo: false
+language: node_js
+node_js:
+  - "lts/*"
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+install: npm install
+after_success: kcd-scripts travis-after-success
+branches:
+  only: master
