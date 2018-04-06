@@ -7,7 +7,7 @@
   "module": "dist/react-dip.esm.js",
   "jsnext:main": "dist/react-dip.esm.js",
   "scripts": {
-    "test": "jest",
+    "test": "flow && jest",
     "build:kcd": "kcd-scripts build",
     "build":
       "npm run build:commonjs && npm run build:css && npm run build:es && npm run build:demo && npm run build:umd",

@@ -1,25 +1,42 @@
 // @flow
-import type { FromType } from "./FromType"
 import React, { Component } from "react"
-import type { Node, Element } from "react"
+import type { Node } from "react"
 
-export type AnimatableElement = HTMLElement & {animate?: ({[string]: string} | {}[], {}) => void}
+declare var getComputedStyle: (
+  elt: Element,
+  pseudoElt?: string
+) => CSSStyleDeclaration
+
+export type FromType = {
+  rect: ClientRect,
+  opacity: string,
+  borderRadius: string
+}
+
+export type AnimatableElement = HTMLElement & {
+  animate?: ({ [string]: string } | {}[], {}) => void
+}
 
 type Props = {
   id: string,
   children?: Node,
   style?: CSSStyleDeclaration,
-  component?: Node // TODO: Add string
+  element?: string
 }
 
 class Dip extends Component<Props> {
-  constructor(props) {
+  fromStyle: ?{
+    rect: ClientRect,
+    [string]: string
+  }
+
+  constructor(props: Props) {
     super(props)
     this.fromStyle = Dip.getFromStyle(this.props.id)
   }
 
-  static registeredNodes = {}
-  static unregisterFromNode = (id: string, node: AnimatableElement) => {
+  static registeredNodes: { [string]: AnimatableElement } = {}
+  static unregisterFromNode = (id: string, node: ?AnimatableElement) => {
     if (Dip.registeredNodes[id] === node) {
       delete Dip.registeredNodes[id]
     }
@@ -30,7 +47,7 @@ class Dip extends Component<Props> {
   static getFromStyle = (id: string) => {
     const fromNode = Dip.registeredNodes[id]
     if (!fromNode) return
-    const computedStyle = window.getComputedStyle(fromNode)
+    const computedStyle: CSSStyleDeclaration = getComputedStyle(fromNode)
     return {
       rect: fromNode.getBoundingClientRect(),
       opacity: computedStyle.opacity,
@@ -41,36 +58,37 @@ class Dip extends Component<Props> {
   ref: ?AnimatableElement
 
   componentDidMount() {
-    const transitioningFrom: FromType = this.fromStyle
-    if (!transitioningFrom) return
+    const { ref, fromStyle } = this
+    if (ref == null || fromStyle == null) return
     const {
       rect: rectFrom,
       opacity: opacityFrom,
       borderRadius: borderRadiusFrom
-    } = transitioningFrom
-    const transTo = this.ref.getBoundingClientRect()
+    } = fromStyle
+    const transTo = ref.getBoundingClientRect()
     const scaleFromX = rectFrom.width / transTo.width
     const scaleFromY = rectFrom.height / transTo.height
     const xFrom = rectFrom.left - transTo.left
     const yFrom = rectFrom.top - transTo.top
-    const opacityTo = window.getComputedStyle(this.ref).opacity
-    const borderRadiusTo = window.getComputedStyle(this.ref).borderRadius
-    /*flow-ignore*/
-    this.ref && this.ref.animate && this.ref.animate(
-      [
-        {
-          transform: `translateX(${xFrom}px) translateY(${yFrom}px) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
-          opacity: opacityFrom,
-          borderRadius: borderRadiusFrom
-        },
-        {
-          transform: `translateX(0px) translateY(0px) scaleX(1) scaleY(1)`,
-          opacity: opacityTo,
-          borderRadius: borderRadiusTo
-        }
-      ],
-      { duration: 200, easing: "ease-out" }
-    )
+    const opacityTo = getComputedStyle(ref).opacity
+    const borderRadiusTo = getComputedStyle(ref).borderRadius
+
+    ref.animate &&
+      ref.animate(
+        [
+          {
+            transform: `translateX(${xFrom}px) translateY(${yFrom}px) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
+            opacity: opacityFrom,
+            borderRadius: borderRadiusFrom
+          },
+          {
+            transform: `translateX(0px) translateY(0px) scaleX(1) scaleY(1)`,
+            opacity: opacityTo,
+            borderRadius: borderRadiusTo
+          }
+        ],
+        { duration: 200, easing: "ease-out" }
+      )
   }
 
   componentWillUnmount() {
@@ -87,17 +105,17 @@ class Dip extends Component<Props> {
       children,
       id,
       style,
-      component: Component = "div",
+      element: Element = "div",
       ...rest
     } = this.props
     return (
-      <Component
+      <Element
         {...rest}
         ref={this.addRef}
         style={{ ...style, transformOrigin: "left top" }}
       >
         {children}
-      </Component>
+      </Element>
     )
   }
 }
