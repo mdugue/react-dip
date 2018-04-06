@@ -1,6 +1,8 @@
 // @flow
+// TODO Implement optInCssStyles, allow single strings
 import React, { Component } from "react"
 import type { Node } from "react"
+import { pick } from "./util"
 
 declare var getComputedStyle: (
   elt: Element,
@@ -9,8 +11,7 @@ declare var getComputedStyle: (
 
 export type FromType = {
   rect: ClientRect,
-  opacity: string,
-  borderRadius: string
+  computedStyle: {}
 }
 
 export type AnimatableElement = HTMLElement & {
@@ -18,22 +19,16 @@ export type AnimatableElement = HTMLElement & {
 }
 
 type Props = {
-  id: string,
   children?: Node,
-  style?: CSSStyleDeclaration,
-  element?: string
+  durationTo?: number,
+  element?: string,
+  id: string,
+  optInCssStyles: string[],
+  style?: CSSStyleDeclaration
 }
 
 class Dip extends Component<Props> {
-  fromStyle: ?{
-    rect: ClientRect,
-    [string]: string
-  }
-
-  constructor(props: Props) {
-    super(props)
-    this.fromStyle = Dip.getFromStyle(this.props.id)
-  }
+  fromStyle: ?FromType = Dip.getFromStyle(this.props.id)
 
   static registeredNodes: { [string]: AnimatableElement } = {}
   static unregisterFromNode = (id: string, node: ?AnimatableElement) => {
@@ -50,8 +45,7 @@ class Dip extends Component<Props> {
     const computedStyle: CSSStyleDeclaration = getComputedStyle(fromNode)
     return {
       rect: fromNode.getBoundingClientRect(),
-      opacity: computedStyle.opacity,
-      borderRadius: computedStyle.borderRadius
+      computedStyle: { ...computedStyle }
     }
   }
 
@@ -60,35 +54,36 @@ class Dip extends Component<Props> {
   componentDidMount() {
     const { ref, fromStyle } = this
     if (ref == null || fromStyle == null) return
-    const {
-      rect: rectFrom,
-      opacity: opacityFrom,
-      borderRadius: borderRadiusFrom
-    } = fromStyle
+    const { durationTo = 200, optInCssStyles = [] } = this.props
+    const { rect: rectFrom, computedStyle: computedStyleFrom } = fromStyle
+
     const transTo = ref.getBoundingClientRect()
     const scaleFromX = rectFrom.width / transTo.width
     const scaleFromY = rectFrom.height / transTo.height
     const xFrom = rectFrom.left - transTo.left
     const yFrom = rectFrom.top - transTo.top
-    const opacityTo = getComputedStyle(ref).opacity
-    const borderRadiusTo = getComputedStyle(ref).borderRadius
 
-    ref.animate &&
+    const computedStyleTo = getComputedStyle(ref)
+
+    if (ref.animate) {
+      // $FlowFixMe
       ref.animate(
         [
           {
             transform: `translateX(${xFrom}px) translateY(${yFrom}px) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
-            opacity: opacityFrom,
-            borderRadius: borderRadiusFrom
+            ...pick(computedStyleFrom, optInCssStyles)
           },
           {
             transform: `translateX(0px) translateY(0px) scaleX(1) scaleY(1)`,
-            opacity: opacityTo,
-            borderRadius: borderRadiusTo
+            ...pick(computedStyleTo, optInCssStyles)
           }
         ],
-        { duration: 200, easing: "ease-out" }
+        {
+          duration: durationTo,
+          easing: "ease-out"
+        }
       )
+    }
   }
 
   componentWillUnmount() {
@@ -106,6 +101,8 @@ class Dip extends Component<Props> {
       id,
       style,
       element: Element = "div",
+      durationTo: _ignoreDurationTo_,
+      optInCssStyles: _ignoreOptInCssStyles_,
       ...rest
     } = this.props
     return (

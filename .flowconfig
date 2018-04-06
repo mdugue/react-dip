@@ -1,5 +1,6 @@
 [ignore]
 ./examples/
+./stories/
 .*/node_modules/
 .*/dist/.*
 
