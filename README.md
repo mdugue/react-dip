@@ -22,13 +22,17 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
 
 `react-dip` solves this by providing animated transisions in an effortless way, that _just works<sup>TM</sup>_, by using the [FLIP technique](https://aerotwist.com/blog/flip-your-animations/#the-general-approach).
 
+## Table of contents
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 * [Installation](#installation)
 * [Quick Start](#quick-start)
+* [Examples](#examples)
 * [How it works](#how-it-works)
+* [Caveats](#caveats)
 * [Inspired by](#inspired-by)
 * [Huge Thanks to](#huge-thanks-to)
 * [TODOs](#todos)
@@ -86,24 +90,41 @@ function Component2() {
 // use complex state here
 // or a routing solution such as react-router
 // or connect it to redux, or ustated
-class MyStatefulParent extends Component {
-  toggleState = setState(state => ({currentStep: state.currentStep++ % 2}))
+export default class MyStatefulParent extends Component {
+  state = {currentStep: 0}
+  toggleState = () =>
+    this.setState(state => ({
+      currentStep: (state.currentStep + 1) % 2,
+    }))
   render() {
-    ;<button onClick={toggleState}>toggle me</button>
-    {
-      this.state.currentStep === 0 ? <Component1 /> : <Component2 />
-    }
+    return (
+      <section>
+        <h1> Quick Start example </h1>
+        <button onClick={this.toggleState}>toggle me</button>
+        {this.state.currentStep === 0 ? <Component1 /> : <Component2 />}
+      </section>
+    )
   }
 }
 ```
 
-_Note: Using `inline styles` as well as `absolute` positioning is often not the perfect way and is applied here for the sake of simplicity. You can use any type CSS or CSS-in-JS styling and fluid / flex / grid layout._
+_Note: Using `inline styles` as well as `absolute` positioning is usually not considered a good way and is applied here for the sake of simplicity.
+You can use any type `CSS` or `CSS-in-JS` styling and `fluid` / `flex` / `grid` layout._
+
+## Examples
+
+* QuickStart Example: https://codesandbox.io/s/20jlowo9rp
 
 ## How it works
 
 DIP-Communication
 
 FLIP
+
+## Caveats
+
+* Block-Elements h1 etc
+* nested Elements
 
 ## Inspired by
 
