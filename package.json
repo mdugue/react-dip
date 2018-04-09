@@ -9,6 +9,7 @@
   "scripts": {
     "build": "kcd-scripts build --bundle",
     "flow": "flow",
+    "lint": "kcd-scripts lint",
     "precommit": "kcd-scripts precommit",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
@@ -55,6 +56,24 @@
     "react": "^16.3.0-alpha.2",
     "react-dom": "^16.3.0-alpha.2"
   },
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js",
+    "rules": {
+      "max-lines": "off",
+      "no-eq-null": "off",
+      "eqeqeq": "off",
+      "react/jsx-indent": "off",
+      "complexity": ["error", 12]
+    }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist",
+    "storybook-static",
+    "typings",
+    "examples"
+  ],
   "jest": {
     "rootDir": "./src/"
   }

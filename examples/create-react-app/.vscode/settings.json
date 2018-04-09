@@ -1,0 +1,7 @@
+{
+  "flow.enabled": true,
+  "flow.showStatus": true,
+  "flow.runOnAllFiles": true,
+  "editor.formatOnType": false,
+  "editor.formatOnPaste": false
+}

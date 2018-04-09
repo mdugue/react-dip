@@ -1,0 +1,33 @@
+{
+  "name": "create-react-app-dip",
+  "version": "0.1.0",
+  "private": true,
+  "author": "Manuel Dugue <post@manueldugue.de> (https://manueldugue.de)",
+  "dependencies": {
+    "flow-bin": "^0.68.0",
+    "prettier": "^1.11.1",
+    "react": "^16.3.0-alpha.3",
+    "react-dip": "^0.0.1",
+    "react-dom": "^16.3.0-alpha.3",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^1.1.1",
+    "react-transition-group": "^2.2.1",
+    "web-animations-js": "^2.3.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow"
+  },
+  "browserslist": {
+    "development": [
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 edge versions"
+    ],
+    "production": [">1%", "last 4 versions", "Firefox ESR", "not ie < 11"]
+  },
+  "devDependencies": {}
+}

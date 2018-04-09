@@ -1,21 +1,21 @@
 // @flow
 // TODO Implement optInCssStyles, allow single strings
-import React, { Component } from "react"
-import type { Node } from "react"
-import { pick } from "./util"
+import React, {Component} from 'react'
+import type {Node} from 'react' // eslint-disable-line no-duplicate-imports
+import {pick} from './util'
 
 declare var getComputedStyle: (
   elt: Element,
-  pseudoElt?: string
+  pseudoElt?: string,
 ) => CSSStyleDeclaration
 
 export type FromType = {
   rect: ClientRect,
-  computedStyle: {}
+  computedStyle: {},
 }
 
 export type AnimatableElement = HTMLElement & {
-  animate?: ({ [string]: string } | {}[], {}) => void
+  animate?: ({[string]: string} | {}[], {}) => void,
 }
 
 type Props = {
@@ -24,13 +24,13 @@ type Props = {
   element?: string,
   id: string,
   optInCssStyles: string[],
-  style?: CSSStyleDeclaration
+  style?: CSSStyleDeclaration,
 }
 
 class Dip extends Component<Props> {
   fromStyle: ?FromType = Dip.getFromStyle(this.props.id)
 
-  static registeredNodes: { [string]: AnimatableElement } = {}
+  static registeredNodes: {[string]: AnimatableElement} = {}
   static unregisterFromNode = (id: string, node: ?AnimatableElement) => {
     if (Dip.registeredNodes[id] === node) {
       delete Dip.registeredNodes[id]
@@ -41,21 +41,21 @@ class Dip extends Component<Props> {
 
   static getFromStyle = (id: string) => {
     const fromNode = Dip.registeredNodes[id]
-    if (!fromNode) return
+    if (!fromNode) return undefined
     const computedStyle: CSSStyleDeclaration = getComputedStyle(fromNode)
     return {
       rect: fromNode.getBoundingClientRect(),
-      computedStyle: { ...computedStyle }
+      computedStyle: {...computedStyle},
     }
   }
 
   ref: ?AnimatableElement
 
   componentDidMount() {
-    const { ref, fromStyle } = this
+    const {ref, fromStyle} = this
     if (ref == null || fromStyle == null) return
-    const { durationTo = 200, optInCssStyles = [] } = this.props
-    const { rect: rectFrom, computedStyle: computedStyleFrom } = fromStyle
+    const {durationTo = 200, optInCssStyles = []} = this.props
+    const {rect: rectFrom, computedStyle: computedStyleFrom} = fromStyle
 
     const transTo = ref.getBoundingClientRect()
     const scaleFromX = rectFrom.width / transTo.width
@@ -71,17 +71,17 @@ class Dip extends Component<Props> {
         [
           {
             transform: `translateX(${xFrom}px) translateY(${yFrom}px) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
-            ...pick(computedStyleFrom, optInCssStyles)
+            ...pick(computedStyleFrom, optInCssStyles),
           },
           {
             transform: `translateX(0px) translateY(0px) scaleX(1) scaleY(1)`,
-            ...pick(computedStyleTo, optInCssStyles)
-          }
+            ...pick(computedStyleTo, optInCssStyles),
+          },
         ],
         {
           duration: durationTo,
-          easing: "ease-out"
-        }
+          easing: 'ease-out',
+        },
       )
     }
   }
@@ -98,18 +98,17 @@ class Dip extends Component<Props> {
   render() {
     const {
       children,
-      id,
       style,
-      element: Element = "div",
-      durationTo: _ignoreDurationTo_,
-      optInCssStyles: _ignoreOptInCssStyles_,
+      element: Element = 'div',
+      durationTo: _ignoreDurationTo_, // eslint-disable-line no-unused-vars
+      optInCssStyles: _ignoreOptInCssStyles_, // eslint-disable-line no-unused-vars
       ...rest
-    } = this.props
+    } = this.props // eslint-disable-line
     return (
       <Element
         {...rest}
         ref={this.addRef}
-        style={{ ...style, transformOrigin: "left top" }}
+        style={{...style, transformOrigin: 'left top'}}
       >
         {children}
       </Element>
