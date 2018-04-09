@@ -20,9 +20,10 @@ export type AnimatableElement = HTMLElement & {
 
 type Props = {
   children?: Node,
-  durationTo?: number,
-  element?: string,
   dipId: string,
+  duration?: number,
+  easing?: string,
+  element?: string,
   optInCssStyles: string[],
   style?: CSSStyleDeclaration,
 }
@@ -54,7 +55,11 @@ class Dip extends Component<Props> {
   componentDidMount() {
     const {ref, fromStyle} = this
     if (ref == null || fromStyle == null) return
-    const {durationTo = 200, optInCssStyles = []} = this.props
+    const {
+      easing = 'ease-out',
+      duration = 200,
+      optInCssStyles = [],
+    } = this.props
     const {rect: rectFrom, computedStyle: computedStyleFrom} = fromStyle
 
     const transTo = ref.getBoundingClientRect()
@@ -79,8 +84,8 @@ class Dip extends Component<Props> {
           },
         ],
         {
-          duration: durationTo,
-          easing: 'ease-out',
+          duration,
+          easing,
         },
       )
     }
@@ -100,7 +105,7 @@ class Dip extends Component<Props> {
       children,
       style,
       element: Element = 'div',
-      durationTo: _ignoreDurationTo_, // eslint-disable-line no-unused-vars
+      duration: _ignoreDuration_, // eslint-disable-line no-unused-vars
       optInCssStyles: _ignoreOptInCssStyles_, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props // eslint-disable-line

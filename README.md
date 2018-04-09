@@ -35,7 +35,8 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
   * [dipId](#dipid)
   * [children](#children)
   * [render (TODO)](#render-todo)
-  * [durationTo](#durationto)
+  * [duration](#duration)
+  * [easing](#easing)
   * [element](#element)
   * [optInCssStyles](#optincssstyles)
   * [className, id, style, aria-..., role, etc.](#classname-id-style-aria--role-etc)
@@ -154,11 +155,17 @@ Content that is rendered as part of that `dip`.
 
 **Warning:** `<Dip render>` takes precedence over `<Dip children>` so don’t use both in the same `<Dip />`.
 
-### durationTo
+### duration
 
 > `number` | _**optional**_, defaults to `200`
 > 
 > Time in milliseconds the animation will take when transitioning _to_ this dip.
+
+### easing
+
+> `string` | _**optional**_, defaults to `"ease-out"`
+
+Specifies the desired timing function. Accepts the pre-defined values `linear`, `ease`, `ease-in`, `ease-out`, and `ease-in-out`, or a custom `cubic-bezier` value like `cubic-bezier(0.42, 0, 0.58, 1)`.
 
 ### element
 
@@ -175,7 +182,7 @@ In case you want to morph more css properties you can specify them here, such as
 
 ### className, id, style, aria-..., role, etc.
 
-> default `react /`HTML attributes` | _**optional**_
+> default `react` / `HTML attributes` | _**optional**_
 
 Any provided standard attribute is passed to the child-container.
 
@@ -240,7 +247,7 @@ There are tons of ideas for improving `react-dip` such as adding fine grained co
 
 * [x] add chapter about polyfilling
 * [ ] render props (of course)
-* [ ] add support for custom timing functions
+* [x] add support for custom timing functions
 * [ ] add support for staggering
 * [ ] add complex examples with routing etc.
 * [ ] add real tests

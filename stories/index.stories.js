@@ -81,7 +81,7 @@ class Morphing extends Component {
         ) : (
           <Comp2
             dipId="simple"
-            durationTo={2000}
+            duration={2000}
             optInCssStyles={['borderRadius', 'backgroundColor']}
           />
         )}
@@ -107,7 +107,7 @@ class Timing extends Component {
         {this.state.isInitialState ? (
           <Comp1 dipId="simple" />
         ) : (
-          <Comp2 dipId="simple" durationTo={2000} />
+          <Comp2 dipId="simple" duration={2000} />
         )}
       </div>
     )
@@ -121,8 +121,8 @@ storiesOf('Basic React-Dip examples', module)
     withMarkdownNotes(`
 # Timing
 
-you can use custom timing by adding the \`durationTo\`-Prop,
-eg \`<Dip durationTo={2000} dipId="timedElement" />\`
+you can use custom timing by adding the \`duration\`-Prop,
+eg \`<Dip duration={2000} dipId="timedElement" />\`
 `)(() => (
       <div>
         <h2>With Timing</h2>
