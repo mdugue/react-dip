@@ -33,9 +33,10 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
 * [Quick Start](#quick-start)
 * [Polyfill](#polyfill)
 * [Examples](#examples)
-* [How it works](#how-it-works)
+* [Dip-WHAT???](#dip-what)
+* [How it works (TODO)](#how-it-works-todo)
 * [Browser Compatiblity](#browser-compatiblity)
-* [Caveats](#caveats)
+* [Caveats (TODO)](#caveats-todo)
 * [Inspired by](#inspired-by)
 * [Huge Thanks to](#huge-thanks-to)
 * [TODOs](#todos)
@@ -139,11 +140,14 @@ import('web-animations-js') // We recommend dynamic imports to keep initial bund
 
 * [Quick Start Example](https://codesandbox.io/s/20jlowo9rp)
 
-## How it works
+## Dip-WHAT???
 
-DIP-Communication
+No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 
-FLIP
+## How it works (TODO)
+
+* Dip-Communication
+* FLIP
 
 ## Browser Compatiblity
 
@@ -153,10 +157,11 @@ FLIP
 
 <sup>\*</sup> [(requires polyfill)](#polyfill)
 
-## Caveats
+## Caveats (TODO)
 
 * Block-Elements h1 etc
 * nested Elements
+* transitioning to elements in scrolled lists (via browser back)
 
 ## Inspired by
 
@@ -172,6 +177,7 @@ FLIP
 There are tons of ideas for improving `react-dip` such as adding fine grained control to your transitions, but the primary goal will stay to keep the API as symple as possible.
 
 * [x] add chapter about polyfilling
+* [ ] render props (of course)
 * [ ] add support for custom timing functions
 * [ ] add support for staggering
 * [ ] add complex examples with routing etc.
