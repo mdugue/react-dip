@@ -1,6 +1,6 @@
 {
   "name": "react-dip",
-  "version": "0.0.3-1",
+  "version": "0.0.3-2",
   "description": "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
   "main": "dist/react-dip.cjs.js",
   "module": "dist/react-dip.esm.js",
@@ -13,6 +13,9 @@
     "storybook:build": "build-storybook",
     "test": "flow && jest"
   },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdugue/react-dip.git"
