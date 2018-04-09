@@ -22,13 +22,13 @@ type Props = {
   children?: Node,
   durationTo?: number,
   element?: string,
-  id: string,
+  dipId: string,
   optInCssStyles: string[],
   style?: CSSStyleDeclaration,
 }
 
 class Dip extends Component<Props> {
-  fromStyle: ?FromType = Dip.getFromStyle(this.props.id)
+  fromStyle: ?FromType = Dip.getFromStyle(this.props.dipId)
 
   static registeredNodes: {[string]: AnimatableElement} = {}
   static unregisterFromNode = (id: string, node: ?AnimatableElement) => {
@@ -36,11 +36,11 @@ class Dip extends Component<Props> {
       delete Dip.registeredNodes[id]
     }
   }
-  static registerFromNode = (id: string, node: AnimatableElement) =>
-    (Dip.registeredNodes[id] = node)
+  static registerFromNode = (dipId: string, node: AnimatableElement) =>
+    (Dip.registeredNodes[dipId] = node)
 
-  static getFromStyle = (id: string) => {
-    const fromNode = Dip.registeredNodes[id]
+  static getFromStyle = (dipId: string) => {
+    const fromNode = Dip.registeredNodes[dipId]
     if (!fromNode) return undefined
     const computedStyle: CSSStyleDeclaration = getComputedStyle(fromNode)
     return {
@@ -87,12 +87,12 @@ class Dip extends Component<Props> {
   }
 
   componentWillUnmount() {
-    Dip.unregisterFromNode(this.props.id, this.ref)
+    Dip.unregisterFromNode(this.props.dipId, this.ref)
   }
 
   addRef = (ref: ?AnimatableElement) => {
     this.ref = ref
-    ref != null && Dip.registerFromNode(this.props.id, ref)
+    ref != null && Dip.registerFromNode(this.props.dipId, ref)
   }
 
   render() {

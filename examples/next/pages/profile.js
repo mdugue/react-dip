@@ -1,6 +1,6 @@
-import React from "react"
-import { contacts } from "../data"
-import Dip from "react-dip"
+import React from 'react'
+import {contacts} from '../data'
+import Dip from 'react-dip'
 
 const contactsById = contacts.reduce((map, contact) => {
   map[contact.id] = contact
@@ -8,7 +8,7 @@ const contactsById = contacts.reduce((map, contact) => {
 }, {})
 
 export default props => (
-  <Dip id={props.url.query.id}>
+  <Dip dipId={props.url.query.id}>
     About {contactsById[props.url.query.id].firstName}
   </Dip>
 )

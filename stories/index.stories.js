@@ -1,17 +1,17 @@
-import React, { Component } from "react"
-import { storiesOf } from "@storybook/react"
-import { withMarkdownNotes } from "@storybook/addon-notes"
-import Dip from "../src"
+import React, {Component} from 'react'
+import {storiesOf} from '@storybook/react'
+import {withMarkdownNotes} from '@storybook/addon-notes'
+import Dip from '../src'
 
 const Comp1 = props => (
   <Dip
     style={{
-      background: "red",
-      width: "100px",
-      top: "100px",
-      left: "100px",
-      position: "relative",
-      height: "100px"
+      background: 'red',
+      width: '100px',
+      top: '100px',
+      left: '100px',
+      position: 'relative',
+      height: '100px',
     }}
     {...props}
   >
@@ -21,13 +21,13 @@ const Comp1 = props => (
 const Comp2 = props => (
   <Dip
     style={{
-      background: "blue",
-      width: "200px",
-      top: "200px",
-      left: "90px",
-      position: "relative",
-      height: "200px",
-      borderRadius: "50%"
+      background: 'blue',
+      width: '200px',
+      top: '200px',
+      left: '90px',
+      position: 'relative',
+      height: '200px',
+      borderRadius: '50%',
     }}
     {...props}
   >
@@ -36,23 +36,23 @@ const Comp2 = props => (
 )
 
 class MinimalSetup extends Component {
-  state = { isInitialState: true }
+  state = {isInitialState: true}
   render() {
     return (
       <div>
         <button
           onClick={() =>
             this.setState(state => ({
-              isInitialState: !state.isInitialState
+              isInitialState: !state.isInitialState,
             }))
           }
         >
           Toggle State
         </button>
         {this.state.isInitialState ? (
-          <Comp1 id="simple" />
+          <Comp1 dipId="simple" />
         ) : (
-          <Comp2 id="simple" />
+          <Comp2 dipId="simple" />
         )}
       </div>
     )
@@ -60,14 +60,14 @@ class MinimalSetup extends Component {
 }
 
 class Morphing extends Component {
-  state = { isInitialState: true }
+  state = {isInitialState: true}
   render() {
     return (
       <div>
         <button
           onClick={() =>
             this.setState(state => ({
-              isInitialState: !state.isInitialState
+              isInitialState: !state.isInitialState,
             }))
           }
         >
@@ -75,14 +75,14 @@ class Morphing extends Component {
         </button>
         {this.state.isInitialState ? (
           <Comp1
-            id="simple"
-            optInCssStyles={["borderRadius", "backgroundColor"]}
+            dipId="simple"
+            optInCssStyles={['borderRadius', 'backgroundColor']}
           />
         ) : (
           <Comp2
-            id="simple"
+            dipId="simple"
             durationTo={2000}
-            optInCssStyles={["borderRadius", "backgroundColor"]}
+            optInCssStyles={['borderRadius', 'backgroundColor']}
           />
         )}
       </div>
@@ -91,43 +91,43 @@ class Morphing extends Component {
 }
 
 class Timing extends Component {
-  state = { isInitialState: true }
+  state = {isInitialState: true}
   render() {
     return (
       <div>
         <button
           onClick={() =>
             this.setState(state => ({
-              isInitialState: !state.isInitialState
+              isInitialState: !state.isInitialState,
             }))
           }
         >
           Toggle State
         </button>
         {this.state.isInitialState ? (
-          <Comp1 id="simple" />
+          <Comp1 dipId="simple" />
         ) : (
-          <Comp2 id="simple" durationTo={2000} />
+          <Comp2 dipId="simple" durationTo={2000} />
         )}
       </div>
     )
   }
 }
 
-storiesOf("Basic React-Dip examples", module)
-  .add("minimal setup 🎉", () => <MinimalSetup />)
+storiesOf('Basic React-Dip examples', module)
+  .add('minimal setup 🎉', () => <MinimalSetup />)
   .add(
-    "with Timing",
+    'with Timing',
     withMarkdownNotes(`
 # Timing
 
 you can use custom timing by adding the \`durationTo\`-Prop,
-eg \`<Dip durationTo={2000} id="timedElement" />\`
+eg \`<Dip durationTo={2000} dipId="timedElement" />\`
 `)(() => (
       <div>
         <h2>With Timing</h2>
         <Timing />
       </div>
-    ))
+    )),
   )
-  .add("with morphing 🕰", () => <Morphing />)
+  .add('with morphing 🕰', () => <Morphing />)

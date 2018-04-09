@@ -31,6 +31,14 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
 
 * [Installation](#installation)
 * [Quick Start](#quick-start)
+* [Props](#props)
+  * [dipId](#dipid)
+  * [children](#children)
+  * [render (TODO)](#render-todo)
+  * [durationTo](#durationto)
+  * [element](#element)
+  * [optInCssStyles](#optincssstyles)
+  * [className, id, style, aria-..., role, etc.](#classname-id-style-aria--role-etc)
 * [Polyfill](#polyfill)
 * [Examples](#examples)
 * [Dip-WHAT???](#dip-what)
@@ -79,13 +87,20 @@ import React, {Component} from 'react'
 import Dip from 'react-dip'
 
 function Component1() {
-  return <Dip style={{background: 'red'}}>some Content</Dip>
+  return (
+    <Dip dipId="quickStart" style={{background: 'red'}}>
+      some content
+    </Dip>
+  )
 }
 
 function Component2() {
   return (
-    <Dip style={{position: 'absolute', top: '100px', background: 'green'}}>
-      some other Content <br />
+    <Dip
+      dipId="quickStart"
+      style={{position: 'absolute', top: '100px', background: 'green'}}
+    >
+      some other content <br />
       etc...
     </Dip>
   )
@@ -117,9 +132,56 @@ You can use any type `CSS` or `CSS-in-JS` styling and `fluid` / `flex` / `grid` 
 
 [![Edit react-dip Quick Start](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/20jlowo9rp)
 
+## Props
+
+The API surface is intetended to be as simple as possible. Only `dipId` and `children` (or `render`) are required props. The rest is optional and helps you fine tuning your animations.
+
+### dipId
+
+> `string` | **Required!**
+
+The `id` that groups two different dip elements. React-dip will only create animated transitions between to Elements with the same `dipId`, consider them as potential _from_- and _to_-hints.
+
+### children
+
+> `React Element` | **Required unless using `render`-prop!**
+
+Content that is rendered as part of that `dip`.
+
+### render (TODO)
+
+> `function({})` | **Required unless using `children`-prop!**
+
+**Warning:** `<Dip render>` takes precedence over `<Dip children>` so don’t use both in the same `<Dip />`.
+
+### durationTo
+
+> `number` | _**optional**_, defaults to `200`
+> 
+> Time in milliseconds the animation will take when transitioning _to_ this dip.
+
+### element
+
+> `string` | _**optional**_, defaults to `"div"`
+
+Specify the desired HTML-tag here (eg. `<Dip element="li">`) in case you don't want your children wrapped in a `div`.
+
+### optInCssStyles
+
+> `Array(string)` | _**optional**_, defaults to an empty `array`
+
+By default `react-dip` will morph your components _only_ regarding their sizes and positions using `css transforms` which is usually a good default regarding performance.
+In case you want to morph more css properties you can specify them here, such as `optInCssStyles={["borderRadius", "backgroundColor"]}`. _**optional**_
+
+### className, id, style, aria-..., role, etc.
+
+> default `react /`HTML attributes` | _**optional**_
+
+Any provided standard attribute is passed to the child-container.
+
 ## Polyfill
 
-As some browsers do not support the [Web Animations API](https://caniuse.com/#feat=web-animation), we recommend using the web-animations-js [Polyfill](https://github.com/web-animations/web-animations-js).
+As some browsers do not support the [Web Animations API](https://caniuse.com/#feat=web-animation), we recommend using the [web-animations-js Polyfill](https://github.com/web-animations/web-animations-js).
 
 1.  Install the dependency
 
@@ -146,7 +208,7 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 
 ## How it works (TODO)
 
-* Dip-Communication
+* Dip-Communication, dipId, from & to
 * FLIP
 
 ## Browser Compatiblity

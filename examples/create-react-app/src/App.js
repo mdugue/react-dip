@@ -90,7 +90,7 @@ const List = () => (
       {contacts.map(contact => (
         <li key={contact.id}>
           <Link to={`/profile/${contact.id}`}>
-            <Dip id={contact.id.toString()}>{contact.firstName}</Dip>
+            <Dip dipId={contact.id.toString()}>{contact.firstName}</Dip>
           </Link>
         </li>
       ))}
@@ -103,7 +103,7 @@ const Profile = ({match}) => {
   return (
     <section>
       <img src={avatar} />
-      <Dip component="h1" id={match.params.id}>
+      <Dip component="h1" dipId={match.params.id}>
         {contact.firstName} {contact.lastName}
       </Dip>
     </section>
