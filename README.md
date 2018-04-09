@@ -10,6 +10,7 @@
 
 _TODO: Video / gif here_
 
+[![Version](https://badge.fury.io/js/react-dip.svg)](https://www.npmjs.com/package/react-dip)
 [![Size](http://img.badgesize.io/https://unpkg.com/react-dip/dist/react-dip.umd.min.js?label=size)](https://unpkg.com/react-dip/dist/)
 [![Size](http://img.badgesize.io/https://unpkg.com/react-dip/dist/react-dip.umd.min.js?compression=gzip&label=gzip%20size)](https://unpkg.com/react-dip/dist/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mdugue/react-dip.svg)](https://greenkeeper.io/)
@@ -30,8 +31,10 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
 
 * [Installation](#installation)
 * [Quick Start](#quick-start)
+* [Polyfill](#polyfill)
 * [Examples](#examples)
 * [How it works](#how-it-works)
+* [Browser Compatiblity](#browser-compatiblity)
 * [Caveats](#caveats)
 * [Inspired by](#inspired-by)
 * [Huge Thanks to](#huge-thanks-to)
@@ -111,15 +114,44 @@ export default class MyStatefulParent extends Component {
 _Note: Using `inline styles` as well as `absolute` positioning is usually not considered a good way and is applied here for the sake of simplicity.
 You can use any type `CSS` or `CSS-in-JS` styling and `fluid` / `flex` / `grid` layout._
 
+[![Edit react-dip Quick Start](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/20jlowo9rp)
+
+## Polyfill
+
+As some browsers do not support the [Web Animations API](https://caniuse.com/#feat=web-animation), we recommend using the web-animations-js [Polyfill](https://github.com/web-animations/web-animations-js).
+
+1.  Install the dependency
+
+```bash
+$ yarn add web-animations-js
+
+# or using npm
+$ npm install --save web-animations-js
+```
+
+2.  include the dependency into your project.
+
+```javascript
+import('web-animations-js') // We recommend dynamic imports to keep initial bundlesize small
+```
+
 ## Examples
 
-* QuickStart Example: https://codesandbox.io/s/20jlowo9rp
+* [Quick Start Example](https://codesandbox.io/s/20jlowo9rp)
 
 ## How it works
 
 DIP-Communication
 
 FLIP
+
+## Browser Compatiblity
+
+| Chrome | Firefox | Safari          | Edge            | IE              | iOS Safari/Chrome | Android Chrome  |
+| ------ | ------- | --------------- | --------------- | --------------- | ----------------- | --------------- |
+| ✅     | ✅      | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup>   | ✅<sup>\*</sup> |
+
+<sup>\*</sup> [(requires polyfill)](<(#installation)>)
 
 ## Caveats
 
@@ -140,6 +172,8 @@ FLIP
 There are tons of ideas for improving `react-dip` such as adding fine grained control to your transitions, but the primary goal will stay to keep the API as symple as possible.
 
 * [ ] add support for staggering
+* [ ] add complex examples with routing etc.
+* [ ] add real tests
 * [ ] add possibility of declaring alternative components that are shown whilst animating
 * [ ] export types for flow and typescript
 * [ ] add contributing guide lines
