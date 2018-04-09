@@ -1,6 +1,6 @@
 {
   "name": "react-dip",
-  "version": "0.0.3-3",
+  "version": "0.0.3-4",
   "description": "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
   "main": "dist/react-dip.cjs.js",
   "module": "dist/react-dip.esm.js",
