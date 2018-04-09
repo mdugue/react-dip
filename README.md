@@ -151,7 +151,7 @@ FLIP
 | ------ | ------- | --------------- | --------------- | --------------- | ----------------- | --------------- |
 | ✅     | ✅      | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup>   | ✅<sup>\*</sup> |
 
-<sup>\*</sup> [(requires polyfill)](<(#installation)>)
+<sup>\*</sup> [(requires polyfill)](#polyfill)
 
 ## Caveats
 
@@ -171,6 +171,8 @@ FLIP
 
 There are tons of ideas for improving `react-dip` such as adding fine grained control to your transitions, but the primary goal will stay to keep the API as symple as possible.
 
+* [x] add chapter about polyfilling
+* [ ] add support for custom timing functions
 * [ ] add support for staggering
 * [ ] add complex examples with routing etc.
 * [ ] add real tests
