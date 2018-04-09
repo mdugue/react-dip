@@ -1,18 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-* [react-dip](#react-dip)
-  * [DISCLAIMER](#disclaimer)
-  * [Why?](#why)
-  * [Installation](#installation)
-  * [Quick Start](#quick-start)
-  * [How it works](#how-it-works)
-  * [Inspired by](#inspired-by)
-  * [TODOs](#todos)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # react-dip
 
 **Simple & declarative** transition animations for [React](https://facebook.github.io/react).
@@ -36,6 +21,19 @@ _TODO: Video / gif here_
 Ever wanted to implement one of those incredible designs you find on [dribble](http://dribbble.com/) or [Muzli](https://muz.li/) where one element beautifully transforms into another upon page transition? And then realized _"But I want my code to stay statefull, decoupled, scalable, declarative"_, so you ended up with regular "hard cuts" instead? – **To me this happend very very often!**
 
 `react-dip` solves this by providing animated transisions in an effortless way, that _just works<sup>TM</sup>_, by using the [FLIP technique](https://aerotwist.com/blog/flip-your-animations/#the-general-approach).
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+* [Installation](#installation)
+* [Quick Start](#quick-start)
+* [How it works](#how-it-works)
+* [Inspired by](#inspired-by)
+* [Huge Thanks to](#huge-thanks-to)
+* [TODOs](#todos)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Installation
 
@@ -72,28 +70,30 @@ The API is as small as possible, almost everything is optional, so you see resul
 import React, {Component} from 'react'
 import Dip from 'react-dip'
 
-function Component1() => (
-  <Dip style={{background: 'red'}}>
-    some Content
-  </Dip>
-)
+function Component1() {
+  return <Dip style={{background: 'red'}}>some Content</Dip>
+}
 
-function Component2() => (
-  <Dip style={{position: 'absolute', top: '100px', background: 'green'}}>
-    some other Content <br />
-    etc...
-  </Dip>
-)
+function Component2() {
+  return (
+    <Dip style={{position: 'absolute', top: '100px', background: 'green'}}>
+      some other Content <br />
+      etc...
+    </Dip>
+  )
+}
 
 // use complex state here
 // or a routing solution such as react-router
 // or connect it to redux, or ustated
 class MyStatefulParent extends Component {
-    toggleState = setState(state => ({currentStep: (state.currentStep++ %2)}))
-    render() {
-        <button onClick={toggleState}>toggle me</button>
-        {(this.state.currentStep === 0) ? <Component1 /> : <Component2 />}
+  toggleState = setState(state => ({currentStep: state.currentStep++ % 2}))
+  render() {
+    ;<button onClick={toggleState}>toggle me</button>
+    {
+      this.state.currentStep === 0 ? <Component1 /> : <Component2 />
     }
+  }
 }
 ```
 
@@ -108,6 +108,11 @@ FLIP
 ## Inspired by
 
 * https://github.com/joshwcomeau/react-flip-move
+
+## Huge Thanks to
+
+* [Kent C. Dodds](https://github.com/kentcdodds/) for his inspiring work, such as [kcd-scripts](https://github.com/kentcdodds/kcd-scripts)
+* [Ives van Horne](https://github.com/compuives) amongst other for [CodeSandbox](codesandbox.io)
 
 ## TODOs
 
