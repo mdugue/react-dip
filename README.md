@@ -70,7 +70,7 @@ The API is as small as possible, almost everything is optional, so you see resul
 
 ```jsx
 import React, {Component} from 'react'
-import Dip from 'react-dip`
+import Dip from 'react-dip'
 
 function Component1() => (
   <Dip style={{background: 'red'}}>
