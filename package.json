@@ -1,7 +1,8 @@
 {
   "name": "react-dip",
-  "version": "0.0.3-4",
-  "description": "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
+  "version": "0.0.3-beta.0",
+  "description":
+    "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
   "main": "dist/react-dip.cjs.js",
   "module": "dist/react-dip.esm.js",
   "jsnext:main": "dist/react-dip.esm.js",
@@ -14,18 +15,12 @@
     "storybook:build": "build-storybook",
     "test": "flow && jest"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdugue/react-dip.git"
   },
-  "keywords": [
-    "react",
-    "UI",
-    "UX"
-  ],
+  "keywords": ["react", "UI", "UX"],
   "author": "Manuel Dugue <post@manueldugue.de> (https://manueldugue.de)",
   "license": "MIT",
   "bugs": {
@@ -68,10 +63,7 @@
       "no-eq-null": "off",
       "eqeqeq": "off",
       "react/jsx-indent": "off",
-      "complexity": [
-        "error",
-        12
-      ]
+      "complexity": ["error", 12]
     }
   },
   "eslintIgnore": [

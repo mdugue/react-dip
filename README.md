@@ -158,8 +158,8 @@ Content that is rendered as part of that `dip`.
 ### duration
 
 > `number` | _**optional**_, defaults to `200`
-> 
-> Time in milliseconds the animation will take when transitioning _to_ this dip.
+
+Time in milliseconds the animation will take when transitioning _to_ this dip.
 
 ### easing
 
