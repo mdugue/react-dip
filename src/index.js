@@ -25,7 +25,7 @@ type Props = {
   easing?: string,
   element?: string,
   optInCssStyles: string[],
-  render?: () => Node,
+  render?: ({ref: (?AnimatableElement) => void, style: {}}) => Node,
   style?: CSSStyleDeclaration,
 }
 
@@ -100,17 +100,11 @@ class Dip extends Component<Props> {
     ref != null && Dip.registerFromNode(this.props.dipId, ref)
   }
 
-  render() {
-    const {
-      children,
-      dipId,
-      duration: _ignoreDuration_, // eslint-disable-line no-unused-vars
-      element: Element = 'div',
-      optInCssStyles: _ignoreOptInCssStyles_, // eslint-disable-line no-unused-vars
-      render,
-      style,
-      ...rest
-    } = this.props
+  /**
+   * notify the user if props are not set correctly via console.log / console.warn
+   */
+  logWarnings = () => {
+    const {children, dipId, element, render} = this.props // eslint-disable-line no-unused-vars // eslint-disable-line no-unused-vars
     /* eslint-disable */
     if (dipId == null) {
       console.error(
@@ -122,7 +116,37 @@ class Dip extends Component<Props> {
         'please specify either a `children` or a `render`-Prop. See https://github.com/mdugue/react-dip',
       )
     }
+    if (render != null && element != null) {
+      console.warn(
+        'the `element`-Prop will be ignored as you specified a `render`-Prop. See https://github.com/mdugue/react-dip',
+      )
+    }
     /* eslint-disable */
+  }
+
+  render() {
+    const {
+      children,
+      dipId: _ignoreDipId_, // eslint-disable-line no-unused-vars,
+      duration: _ignoreDuration_, // eslint-disable-line no-unused-vars
+      element: Element = 'div',
+      optInCssStyles: _ignoreOptInCssStyles_, // eslint-disable-line no-unused-vars
+      render,
+      style,
+      ...rest
+    } = this.props
+
+    this.logWarnings()
+
+    if (render != null)
+      return render({
+        ...rest,
+        ref: this.addRef,
+        style: {
+          ...style,
+          transformOrigin: 'left top',
+        },
+      })
     return (
       <Element
         {...rest}

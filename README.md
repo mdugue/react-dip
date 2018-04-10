@@ -34,7 +34,7 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
 * [Props](#props)
   * [dipId](#dipid)
   * [children](#children)
-  * [render (TODO)](#render-todo)
+  * [render](#render)
   * [duration](#duration)
   * [easing](#easing)
   * [element](#element)
@@ -147,11 +147,13 @@ The `id` that groups two different dip elements. React-dip will only create anim
 
 > `React Element` | **Required unless using `render`-prop!**
 
-Content that is rendered as part of that `dip`.
+Content that is rendered as part of that `Dip`.
 
-### render (TODO)
+### render
 
-> `function({})` | **Required unless using `children`-prop!**
+> `function({ref: function(), styles: {}})` | **Required unless using `children`-prop!**
+
+Function that should return the content that is rendered as part of that `Dip`. Allows for more advanced pattern and skips the wrapping Element. See [render prop](https://cdb.reacttraining.com/use-a-render-prop-50de598f11ce) for further details.
 
 **Warning:** `<Dip render>` takes precedence over `<Dip children>` so don’t use both in the same `<Dip />`.
 
@@ -231,6 +233,7 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 * Block-Elements h1 etc
 * nested Elements
 * transitioning to elements in scrolled lists (via browser back)
+* text can get distorted
 
 ## Inspired by
 
@@ -246,10 +249,10 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 There are tons of ideas for improving `react-dip` such as adding fine grained control to your transitions, but the primary goal will stay to keep the API as symple as possible.
 
 * [x] add chapter about polyfilling
-* [ ] render props (of course)
+* [x] render props (of course)
 * [x] add support for custom timing functions
 * [ ] add support for staggering
-* [ ] add complex examples with routing etc.
+* [ ] add complex examples with renderProps, routing etc.
 * [ ] add real tests
 * [ ] add possibility of declaring alternative components that are shown whilst animating
 * [ ] export types for flow and typescript

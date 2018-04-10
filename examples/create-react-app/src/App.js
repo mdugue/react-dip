@@ -3,7 +3,6 @@ import React from 'react'
 import './App.css'
 import Dip from 'react-dip'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
-import avatar from './Avatar.svg'
 
 const contacts = [
   {
@@ -90,7 +89,12 @@ const List = () => (
       {contacts.map(contact => (
         <li key={contact.id}>
           <Link to={`/profile/${contact.id}`}>
-            <Dip dipId={contact.id.toString()}>{contact.firstName}</Dip>
+            <Dip
+              dipId={contact.id.toString()}
+              style={{display: 'inline-block'}}
+            >
+              {contact.firstName}
+            </Dip>
           </Link>
         </li>
       ))}
@@ -102,8 +106,7 @@ const Profile = ({match}) => {
   const contact = contactsById[match.params.id]
   return (
     <section>
-      <img src={avatar} alt="Profile" />
-      <Dip component="h1" dipId={match.params.id}>
+      <Dip element="h1" dipId={match.params.id} optInCssStyles={['color']}>
         {contact.firstName} {contact.lastName}
       </Dip>
     </section>

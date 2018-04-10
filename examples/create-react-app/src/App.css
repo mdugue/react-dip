@@ -5,6 +5,11 @@
   color: white;
 }
 
+h1 {
+  display: inline-block;
+  color: #4abdac;
+}
+
 .App-title {
   font-size: 1.5em;
 }

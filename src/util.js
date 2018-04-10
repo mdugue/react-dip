@@ -5,3 +5,8 @@ export function pick(o: {}, fields: string[]) {
     return a
   }, {})
 }
+
+// TODO Implement if needed
+export function omit(o: {}) {
+  return o
+}

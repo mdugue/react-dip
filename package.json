@@ -3,18 +3,19 @@
   "version": "0.0.3-beta.1",
   "description": "Simple & declarative transition animations for React",
   "main": "dist/react-dip.cjs.js",
-  "module": "dist/react-dip.esm.js",
   "jsnext:main": "dist/react-dip.esm.js",
+  "module": "dist/react-dip.esm.js",
+  "pure-module": true,
   "scripts": {
     "build": "kcd-scripts build --bundle",
+    "copyFlowSource": "node ./buildscripts/createFlowLinks",
     "flow": "flow",
     "lint": "kcd-scripts lint",
+    "postbuild": "npm run copyFlowSource",
     "precommit": "kcd-scripts precommit",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "test": "flow && jest",
-    "copyFlowSource": "node ./buildscripts/createFlowLinks",
-    "postbuild": "npm run copyFlowSource"
+    "test": "flow && jest"
   },
   "files": ["dist", "preact", "src"],
   "repository": {
@@ -44,24 +45,24 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^22.4.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-react-jsx": "^6.24.1",
     "babel-preset-env": "^1.6.1",
     "babel-preset-flow": "^6.23.0",
-    "babel-preset-react": "^6.24.1",
     "babel-runtime": "^6.26.0",
     "cross-env": "^5.1.4",
     "flow-bin": "^0.69.0",
     "jest": "^22.4.3",
     "kcd-scripts": "^0.37.0",
     "prettier": "^1.11.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
     "regenerator-runtime": "^0.11.1"
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react": ">=15.0.0",
+    "react-dom": ">=15.0.0"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
@@ -78,7 +79,8 @@
     "coverage",
     "dist",
     "storybook-static",
-    "examples"
+    "examples",
+    "stories"
   ],
   "jest": {
     "rootDir": "./src/"
