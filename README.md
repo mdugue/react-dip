@@ -210,6 +210,7 @@ import('web-animations-js') // We recommend dynamic imports to keep initial bund
 ## Examples
 
 * [Quick Start Example](https://codesandbox.io/s/20jlowo9rp)
+* [Styled Components, render Props & beautiful images](https://codesandbox.io/s/l5qlnjo1v7)
 * [With React Router and Material-UI](https://codesandbox.io/s/mmnn5k0nx8)
 
 ## Dip-WHAT???
@@ -258,4 +259,6 @@ There are tons of ideas for improving `react-dip` such as adding fine grained co
 * [ ] add possibility of declaring alternative components that are shown whilst animating
 * [ ] export types for flow and typescript
 * [ ] add contributing guide lines
-* [x] add error handling
+* [x] add error handling for props
+* [ ] add error handling for refs
+* [ ] move animation to portal, allowing for parents with `overflow: hidden` and avoiding z-index issues
