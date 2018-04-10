@@ -1,8 +1,7 @@
 {
   "name": "react-dip",
   "version": "0.0.3-beta.1",
-  "description":
-    "placeholder for some upcoming deep-dive-dip-dop-micro-macro react lib",
+  "description": "Simple & declarative transition animations for React",
   "main": "dist/react-dip.cjs.js",
   "module": "dist/react-dip.esm.js",
   "jsnext:main": "dist/react-dip.esm.js",
@@ -13,14 +12,23 @@
     "precommit": "kcd-scripts precommit",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
-    "test": "flow && jest"
+    "test": "flow && jest",
+    "copyFlowSource": "node ./buildscripts/createFlowLinks",
+    "postbuild": "npm run copyFlowSource"
   },
-  "files": ["dist"],
+  "files": ["dist", "preact", "src"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdugue/react-dip.git"
   },
-  "keywords": ["react", "UI", "UX"],
+  "keywords": [
+    "react",
+    "UI",
+    "UX",
+    "transitions",
+    "animations",
+    "microinteractions"
+  ],
   "author": "Manuel Dugue <post@manueldugue.de> (https://manueldugue.de)",
   "license": "MIT",
   "bugs": {
@@ -48,13 +56,12 @@
     "jest": "^22.4.3",
     "kcd-scripts": "^0.37.0",
     "prettier": "^1.11.1",
-    "regenerator-runtime": "^0.11.1",
-    "rimraf": "^2.6.2"
+    "regenerator-runtime": "^0.11.1"
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": "^16.3.0-alpha.2",
-    "react-dom": "^16.3.0-alpha.2"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
@@ -71,7 +78,6 @@
     "coverage",
     "dist",
     "storybook-static",
-    "typings",
     "examples"
   ],
   "jest": {

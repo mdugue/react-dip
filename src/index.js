@@ -25,6 +25,7 @@ type Props = {
   easing?: string,
   element?: string,
   optInCssStyles: string[],
+  render?: () => Node,
   style?: CSSStyleDeclaration,
 }
 
@@ -49,7 +50,6 @@ class Dip extends Component<Props> {
       computedStyle: {...computedStyle},
     }
   }
-
   ref: ?AnimatableElement
 
   componentDidMount() {
@@ -103,12 +103,26 @@ class Dip extends Component<Props> {
   render() {
     const {
       children,
-      style,
-      element: Element = 'div',
+      dipId,
       duration: _ignoreDuration_, // eslint-disable-line no-unused-vars
+      element: Element = 'div',
       optInCssStyles: _ignoreOptInCssStyles_, // eslint-disable-line no-unused-vars
+      render,
+      style,
       ...rest
-    } = this.props // eslint-disable-line
+    } = this.props
+    /* eslint-disable */
+    if (dipId == null) {
+      console.error(
+        "please specify a `dipId`-Prop. Otherwise you won't see any or unexcpected animations. See https://github.com/mdugue/react-dip",
+      )
+    }
+    if (children == null && render == null) {
+      console.error(
+        'please specify either a `children` or a `render`-Prop. See https://github.com/mdugue/react-dip',
+      )
+    }
+    /* eslint-disable */
     return (
       <Element
         {...rest}

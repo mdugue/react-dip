@@ -254,4 +254,4 @@ There are tons of ideas for improving `react-dip` such as adding fine grained co
 * [ ] add possibility of declaring alternative components that are shown whilst animating
 * [ ] export types for flow and typescript
 * [ ] add contributing guide lines
-* [ ] add error handling
+* [x] add error handling

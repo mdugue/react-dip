@@ -102,7 +102,7 @@ const Profile = ({match}) => {
   const contact = contactsById[match.params.id]
   return (
     <section>
-      <img src={avatar} />
+      <img src={avatar} alt="Profile" />
       <Dip component="h1" dipId={match.params.id}>
         {contact.firstName} {contact.lastName}
       </Dip>
