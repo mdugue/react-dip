@@ -210,6 +210,7 @@ import('web-animations-js') // We recommend dynamic imports to keep initial bund
 ## Examples
 
 * [Quick Start Example](https://codesandbox.io/s/20jlowo9rp)
+* [With React Router and Material-UI](https://codesandbox.io/s/mmnn5k0nx8)
 
 ## Dip-WHAT???
 
