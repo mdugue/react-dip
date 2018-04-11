@@ -65,11 +65,13 @@ class Dip extends Component<Props> {
 
   animate = () => {}
 
-  createAndAppemdAnimationRef = () => {
-    const {ref} = this
+  createAndAppemdAnimationRef = (ref: AnimatableElement, rect: ClientRect) => {
     if (!ref)
       throw Error('could not create animation Ref as ref is not defined')
     const animationRef: AnimatableElement = ref.cloneNode(true)
+    animationRef.style.position = 'absolute'
+    animationRef.style.width = `${rect.width}px`
+    animationRef.style.height = `${rect.height}px`
     this.animationRef = animationRef
     Dip.animationLayer.appendChild(animationRef)
     return animationRef
@@ -107,7 +109,8 @@ class Dip extends Component<Props> {
     } = this.props
 
     const computedStyleTo = getComputedStyle(ref)
-    const animationRef = this.createAndAppemdAnimationRef()
+    const rectTo = ref.getBoundingClientRect()
+    const animationRef = this.createAndAppemdAnimationRef(ref, rectTo)
 
     const {
       xFrom,
@@ -118,7 +121,7 @@ class Dip extends Component<Props> {
       scaleFromY,
     } = this.calcTransformParams(
       fromStyle.rect,
-      ref.getBoundingClientRect(),
+      rectTo,
       animationRef.getBoundingClientRect(),
     )
 

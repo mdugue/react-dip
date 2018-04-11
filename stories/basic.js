@@ -181,8 +181,7 @@ const FloatingElement = props => (
 const LargeComponent = props => (
   <Dip
     style={{
-      margin: '5px 200px',
-      width: '500px',
+      width: '100%',
       height: '500px',
       background: getRandomColor(),
     }}

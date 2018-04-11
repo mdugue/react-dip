@@ -266,12 +266,14 @@ There are tons of ideas for improving `react-dip` such as adding fine grained co
 * [ ] add contributing guide lines
 * [x] add error handling for props
 * [ ] add error handling for refs
-* [x] move animation to portal, allowing for parents with `overflow: hidden` and avoiding z-index issues
+* [x] move animation to proper element, allowing for parents with `overflow: hidden` and avoiding z-index issues
 
 ### For some near future milestone
 
 * [ ] add support for staggering
 * [ ] add real tests
 * [ ] export types for flowtyped and typescript
-* [ ] add optional placeholder component that is shown whilst animating
+* [ ] add optional `placeholder` component that is shown whilst animating
 * [ ] add documentation, (maybe even abstractions) for image transitions from low-res to high-res
+* [ ] make animation-layer custmizable, so regular items _can_ be in front of them (`z`-wise)
+* [ ] investigate possible optimizations for the scrolling issues
