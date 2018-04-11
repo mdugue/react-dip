@@ -29,10 +29,21 @@ type Props = {
   style?: CSSStyleDeclaration,
 }
 
+function createAnimationDomLayer() {
+  const animationLayer = document.createElement('div')
+  animationLayer.id = 'dip-animations'
+  animationLayer.style.cssText = 'position: absolute;'
+  document.body.appendChild(animationLayer)
+  return animationLayer
+}
+
 class Dip extends Component<Props> {
   fromStyle: ?FromType = Dip.getFromStyle(this.props.dipId)
+  animationRef: ?AnimatableElement
 
+  static animationLayer = createAnimationDomLayer()
   static registeredNodes: {[string]: AnimatableElement} = {}
+
   static unregisterFromNode = (id: string, node: ?AnimatableElement) => {
     if (Dip.registeredNodes[id] === node) {
       delete Dip.registeredNodes[id]
@@ -52,6 +63,40 @@ class Dip extends Component<Props> {
   }
   ref: ?AnimatableElement
 
+  animate = () => {}
+
+  createAndAppemdAnimationRef = () => {
+    const {ref} = this
+    if (!ref)
+      throw Error('could not create animation Ref as ref is not defined')
+    const animationRef: AnimatableElement = ref.cloneNode(true)
+    this.animationRef = animationRef
+    Dip.animationLayer.appendChild(animationRef)
+    return animationRef
+  }
+
+  removeAnimationRef = () => {
+    this.animationRef &&
+      this.animationRef.parentNode &&
+      Dip.animationLayer.removeChild(this.animationRef)
+    this.animationRef = undefined
+  }
+
+  calcTransformParams(
+    rectFrom: ClientRect,
+    rectTo: ClientRect,
+    rectIntermediate: ClientRect,
+  ) {
+    const xFrom = rectFrom.left - rectIntermediate.left
+    const yFrom = rectFrom.top - rectIntermediate.top
+    const xTo = rectTo.left - rectIntermediate.left
+    const yTo = rectTo.top - rectIntermediate.top
+    const scaleFromX = rectFrom.width / rectTo.width
+    const scaleFromY = rectFrom.height / rectTo.height
+
+    return {xFrom, yFrom, xTo, yTo, scaleFromX, scaleFromY}
+  }
+
   componentDidMount() {
     const {ref, fromStyle} = this
     if (ref == null || fromStyle == null) return
@@ -60,27 +105,35 @@ class Dip extends Component<Props> {
       duration = 200,
       optInCssStyles = [],
     } = this.props
-    const {rect: rectFrom, computedStyle: computedStyleFrom} = fromStyle
-
-    const transTo = ref.getBoundingClientRect()
-    const scaleFromX = rectFrom.width / transTo.width
-    const scaleFromY = rectFrom.height / transTo.height
-    const xFrom = rectFrom.left - transTo.left
-    const yFrom = rectFrom.top - transTo.top
 
     const computedStyleTo = getComputedStyle(ref)
+    const animationRef = this.createAndAppemdAnimationRef()
 
-    if (ref.animate) {
+    const {
+      xFrom,
+      yFrom,
+      xTo,
+      yTo,
+      scaleFromX,
+      scaleFromY,
+    } = this.calcTransformParams(
+      fromStyle.rect,
+      ref.getBoundingClientRect(),
+      animationRef.getBoundingClientRect(),
+    )
+
+    if (animationRef.animate) {
+      ref.style.visibility = 'hidden'
       // $FlowFixMe
-      ref.animate(
+      const animation = animationRef.animate(
         [
           {
+            ...pick(fromStyle.computedStyle, optInCssStyles),
             transform: `translateX(${xFrom}px) translateY(${yFrom}px) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
-            ...pick(computedStyleFrom, optInCssStyles),
           },
           {
-            transform: `translateX(0px) translateY(0px) scaleX(1) scaleY(1)`,
             ...pick(computedStyleTo, optInCssStyles),
+            transform: `translateX(${xTo}px) translateY(${yTo}px) scaleX(1) scaleY(1)`,
           },
         ],
         {
@@ -88,11 +141,16 @@ class Dip extends Component<Props> {
           easing,
         },
       )
+      animation.onfinish = () => {
+        this.removeAnimationRef()
+        ref.style.visibility = 'visible'
+      }
     }
   }
 
   componentWillUnmount() {
     Dip.unregisterFromNode(this.props.dipId, this.ref)
+    this.removeAnimationRef()
   }
 
   addRef = (ref: ?AnimatableElement) => {
@@ -104,16 +162,11 @@ class Dip extends Component<Props> {
    * notify the user if props are not set correctly via console.log / console.warn
    */
   logWarnings = () => {
-    const {children, dipId, element, render} = this.props // eslint-disable-line no-unused-vars // eslint-disable-line no-unused-vars
+    const {dipId, element, render} = this.props // eslint-disable-line no-unused-vars // eslint-disable-line no-unused-vars
     /* eslint-disable */
     if (dipId == null) {
       console.error(
         "please specify a `dipId`-Prop. Otherwise you won't see any or unexcpected animations. See https://github.com/mdugue/react-dip",
-      )
-    }
-    if (children == null && render == null) {
-      console.error(
-        'please specify either a `children` or a `render`-Prop. See https://github.com/mdugue/react-dip',
       )
     }
     if (render != null && element != null) {

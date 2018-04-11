@@ -15,6 +15,9 @@ _TODO: Video / gif here_
 [![Size](http://img.badgesize.io/https://unpkg.com/react-dip/dist/react-dip.umd.min.js?compression=gzip&label=gzip%20size)](https://unpkg.com/react-dip/dist/)
 [![Greenkeeper badge](https://badges.greenkeeper.io/mdugue/react-dip.svg)](https://greenkeeper.io/)
 <a href="https://codeclimate.com/github/mdugue/react-dip/maintainability"><img src="https://api.codeclimate.com/v1/badges/2392b912933a753b4b5b/maintainability" /></a>
+[![CodeFactor](https://www.codefactor.io/repository/github/mdugue/react-dip/badge)](https://www.codefactor.io/repository/github/mdugue/react-dip)
+[![BCH compliance](https://bettercodehub.com/edge/badge/mdugue/react-dip?branch=master)](https://bettercodehub.com/)
+[![Known Vulnerabilities](https://snyk.io/test/github/mdugue/react-dip/badge.svg)](https://snyk.io/test/github/mdugue/react-dip)
 [![Build Status](https://travis-ci.org/mdugue/react-dip.svg?branch=master)](https://travis-ci.org/mdugue/react-dip)
 
 ## Why?
@@ -49,6 +52,8 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
 * [Inspired by](#inspired-by)
 * [Huge Thanks to](#huge-thanks-to)
 * [TODOs](#todos)
+  * [To be done before anouncing](#to-be-done-before-anouncing)
+  * [For some near future milestone](#for-some-near-future-milestone)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -224,9 +229,9 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 
 ## Browser Compatiblity
 
-| Chrome | Firefox | Safari          | Edge            | IE              | iOS Safari/Chrome | Android Chrome  |
-| ------ | ------- | --------------- | --------------- | --------------- | ----------------- | --------------- |
-| ✅     | ✅      | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup>   | ✅<sup>\*</sup> |
+| Chrome | Firefox | Safari          | Edge            | IE              | iOS             |
+| ------ | ------- | --------------- | --------------- | --------------- | --------------- |
+| ✅     | ✅      | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup> | ✅<sup>\*</sup> |
 
 <sup>\*</sup> [(requires polyfill)](#polyfill)
 
@@ -250,15 +255,23 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 
 There are tons of ideas for improving `react-dip` such as adding fine grained control to your transitions, but the primary goal will stay to keep the API as symple as possible.
 
+### To be done before anouncing
+
 * [x] add chapter about polyfilling
 * [x] render props (of course)
 * [x] add support for custom timing functions
-* [ ] add support for staggering
 * [ ] add complex examples with renderProps, routing etc.
-* [ ] add real tests
 * [ ] add possibility of declaring alternative components that are shown whilst animating
 * [ ] export types for flow and typescript
 * [ ] add contributing guide lines
 * [x] add error handling for props
 * [ ] add error handling for refs
-* [ ] move animation to portal, allowing for parents with `overflow: hidden` and avoiding z-index issues
+* [x] move animation to portal, allowing for parents with `overflow: hidden` and avoiding z-index issues
+
+### For some near future milestone
+
+* [ ] add support for staggering
+* [ ] add real tests
+* [ ] export types for flowtyped and typescript
+* [ ] add optional placeholder component that is shown whilst animating
+* [ ] add documentation, (maybe even abstractions) for image transitions from low-res to high-res
