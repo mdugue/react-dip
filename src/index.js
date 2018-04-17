@@ -143,6 +143,7 @@ class Dip extends Component<Props> {
         {
           duration,
           easing,
+          fill: 'both',
         },
       )
       animation.onfinish = () => {
