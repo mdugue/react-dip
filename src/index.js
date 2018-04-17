@@ -32,7 +32,8 @@ type Props = {
 function createAnimationDomLayer() {
   const animationLayer = document.createElement('div')
   animationLayer.id = 'dip-animations'
-  animationLayer.style.cssText = 'position: absolute;'
+  animationLayer.style.cssText =
+    'position: absolute; top: 0; left: 0; pointer-events: none;'
   document.body && document.body.appendChild(animationLayer)
   return animationLayer
 }
@@ -145,8 +146,8 @@ class Dip extends Component<Props> {
         },
       )
       animation.onfinish = () => {
-        this.removeAnimationRef()
         ref.style.visibility = 'visible'
+        this.removeAnimationRef()
       }
     }
   }

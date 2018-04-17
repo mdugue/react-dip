@@ -19,7 +19,7 @@ const Container = styled.section`
 
 const Image = styled.img`
   width: 100vw;
-  max-height: 70vh;
+  height: 70vh;
   object-fit: cover;
 `
 
