@@ -1,6 +1,6 @@
 {
   "name": "react-dip",
-  "version": "0.0.3-beta.6",
+  "version": "0.0.3-beta.7",
   "description": "Simple & declarative transition animations for React",
   "main": "dist/react-dip.cjs.js",
   "jsnext:main": "dist/react-dip.esm.js",
