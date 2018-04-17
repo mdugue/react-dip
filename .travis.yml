@@ -1,12 +1,18 @@
 sudo: false
 language: node_js
 node_js:
-  - "lts/*"
+- lts/*
 cache:
   directories:
-    - ~/.npm
+  - "~/.npm"
 notifications:
   email: false
   slack: react-dip:Z6Jf26OaXQgan2qcilZz3NjY
 install: npm install
 after_success: kcd-scripts travis-after-success
+before_install: yarn global add greenkeeper-lockfile@1
+before_script: greenkeeper-lockfile-update
+after_script: greenkeeper-lockfile-upload
+env:
+  global:
+    secure: JprYZSpz2cJbaS44pXLHvp3znKSxCSEWiY95rK3o2QcAib1NdzusM1KLqE6dFhmSSjZD/d5hPRbppRa9PW/Pnp1eCnguoBJ04e2gE+MDqxiCqT1UplozBnvdrb+hy4ZTz6RhdPN4N7hQ2kunJkqEg2b4f/nR4eCXRplZT3N7aL6iY61yZoj5u3jiYTBvlCLo5ZZiUCnkiN2T6AGqePypUHeRQ0OPy6n7R24pBWSBho1gMTogmtQpBRaOMDWzI8D/qZQR1zKMkpwezIfWXUm4wr6VBYtg+qJ74NGn2Sv/2yGRt5w4KcSMeNNXH4o8iN8sqcfhh66HCT++ZPVg45+YzytnUQ9o+k8dz2A39fNiZ15hteQyUji38l11ZeVsDk+lFuhDnQ9h/r5j/EZ/BX1ERckiRG3rp4B11UXAKwGbl8zpk5Ce7trgkty+SRo9Oeg2m0E58jQPLU7DCfNq1029tshj9GHTv+K45aB3csTS4SP6PDZ2OMyTxh7r54UtL3gJglBo+lAp8k2bX51arj4MMsBeZWX4ZOEjoPxg6McXThRpLdUjd2XmeELH0tdYSPTn1GuvHtF/VJSjoVb2O5gW5g1/Im/5rjPPVOGJdIN3WDaXR/lqNUDqKEfZrfyBE5m2bRktLdSokeUp5uaD30G6Xvm74uHyFqQDjIUDEDzzQLU=
