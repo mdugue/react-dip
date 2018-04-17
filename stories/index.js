@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {storiesOf} from '@storybook/react'
 import {withMarkdownNotes} from '@storybook/addon-notes'
+import StoryRouter from 'storybook-react-router'
 import {
   Timing,
   Morphing,
@@ -9,7 +10,10 @@ import {
   Overlayed,
   FloatingComponent,
 } from './basic'
-import('web-animations-js')
+import Demo from './grid/demo'
+
+// import Demo from './grid/demo'
+if (!Element.prototype.hasOwnProperty('animate')) import('web-animations-js')
 
 storiesOf('Basic React-Dip examples', module)
   .add('minimal setup 🎉', () => <MinimalSetup />)
@@ -23,3 +27,7 @@ storiesOf('Basic React-Dip examples', module)
   .add('with renderProps 🤩', () => <RenderProps />)
   .add('with potential overlays ', () => <Overlayed />)
   .add('with floating Components ', () => <FloatingComponent />)
+
+storiesOf('Routed examples', module)
+  .addDecorator(StoryRouter())
+  .add('image Grid', () => <Demo />)
