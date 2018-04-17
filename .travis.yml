@@ -4,7 +4,8 @@ node_js:
 - lts/*
 cache:
   directories:
-  - "~/.npm"
+  - ~/.npm
+  - node_modules
 notifications:
   email: false
   slack: react-dip:Z6Jf26OaXQgan2qcilZz3NjY
