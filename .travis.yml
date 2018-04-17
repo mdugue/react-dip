@@ -2,6 +2,11 @@ sudo: false
 language: node_js
 node_js:
 - lts/*
+script:
+  - node --version
+  - yarn --version
+  - yarn build
+  - yarn test
 cache:
   yarn: true
   directories:
