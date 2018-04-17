@@ -33,7 +33,7 @@ function createAnimationDomLayer() {
   const animationLayer = document.createElement('div')
   animationLayer.id = 'dip-animations'
   animationLayer.style.cssText = 'position: absolute;'
-  document.body.appendChild(animationLayer)
+  document.body && document.body.appendChild(animationLayer)
   return animationLayer
 }
 

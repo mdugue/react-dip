@@ -1,3 +1,1 @@
-module.exports = {
-  semi: false,
-}
+module.exports = require('kcd-scripts/prettier')
