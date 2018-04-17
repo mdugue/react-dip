@@ -17,11 +17,7 @@
     "storybook:build": "build-storybook",
     "test": "flow && jest"
   },
-  "files": [
-    "dist",
-    "preact",
-    "src"
-  ],
+  "files": ["dist", "preact", "src"],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdugue/react-dip.git"
@@ -57,10 +53,10 @@
     "flow-bin": "^0.70.0",
     "jest": "^22.4.3",
     "kcd-scripts": "^0.37.0",
-    "prettier": "^1.11.1",
+    "prettier": "^1.12.1",
     "prop-types": "^15.6.1",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2",
     "regenerator-runtime": "^0.11.1",
     "web-animations-js": "^2.3.1"
   },
@@ -76,10 +72,7 @@
       "no-eq-null": "off",
       "eqeqeq": "off",
       "react/jsx-indent": "off",
-      "complexity": [
-        "error",
-        12
-      ]
+      "complexity": ["error", 12]
     }
   },
   "eslintIgnore": [

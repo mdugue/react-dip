@@ -5,10 +5,10 @@
   "author": "Manuel Dugue <post@manueldugue.de> (https://manueldugue.de)",
   "license": "MIT",
   "dependencies": {
-    "next": "^5.0.0",
-    "react": "^16.3.0-alpha.3",
-    "react-dip": "^0.0.1",
-    "react-dom": "^16.3.0-alpha.3"
+    "next": "^5.1.0",
+    "react": "^16.3.2",
+    "react-dip": "^0.0.3-beta.5",
+    "react-dom": "^16.3.2"
   },
   "scripts": {
     "dev": "next",
