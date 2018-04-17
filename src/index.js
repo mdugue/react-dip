@@ -148,7 +148,7 @@ class Dip extends Component<Props> {
       )
       animation.onfinish = () => {
         ref.style.visibility = 'visible'
-        this.removeAnimationRef()
+        window.requestAnimationFrame(this.removeAnimationRef) // TODO: Check if this improves anything on iOS Safari. Remove otherwise
       }
     }
   }

@@ -1,4 +1,3 @@
-// @flow
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
 import Dip from '../../src'

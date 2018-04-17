@@ -1,4 +1,3 @@
-//@flow
 import React from 'react'
 import Dip from '../../src'
 import Card, {CardImage, CardTitle} from './Card'
