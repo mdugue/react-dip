@@ -30,7 +30,6 @@ type Props = {
 }
 
 function createAnimationDomLayer() {
-  if (!document) return undefined
   const animationLayer = document.createElement('div')
   animationLayer.id = 'dip-animations'
   animationLayer.style.cssText =
