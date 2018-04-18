@@ -1,7 +1,6 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {storiesOf} from '@storybook/react'
-import {withMarkdownNotes} from '@storybook/addon-notes'
-import StoryRouter from 'storybook-react-router'
+import storyRouter from 'storybook-react-router'
 import {
   Timing,
   Morphing,
@@ -29,5 +28,5 @@ storiesOf('Basic React-Dip examples', module)
   .add('with floating Components ', () => <FloatingComponent />)
 
 storiesOf('Routed examples', module)
-  .addDecorator(StoryRouter())
+  .addDecorator(storyRouter())
   .add('image Grid', () => <Demo />)

@@ -1,8 +1,8 @@
-import 'web-animations-js'
 import React from 'react'
-import './App.css'
 import Dip from 'react-dip'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+
+if (!Element.prototype.animate) import('web-animations-js')
 
 const contacts = [
   {

@@ -1,11 +1,11 @@
 import React from 'react'
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {Route, Switch} from 'react-router-dom'
 import Loader from './dummyDataLoader'
 import List from './List'
 import Detail from './Detail'
 import './styles.css'
 
-export default () => (
+const Demo = () => (
   <Loader
     render={images => (
       <Switch>
@@ -19,3 +19,5 @@ export default () => (
     )}
   />
 )
+
+export default Demo

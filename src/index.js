@@ -30,10 +30,11 @@ type Props = {
 }
 
 function createAnimationDomLayer() {
+  if (!document) return undefined
   const animationLayer = document.createElement('div')
   animationLayer.id = 'dip-animations'
   animationLayer.style.cssText =
-    'position: absolute; top: 0; left: 0; pointer-events: none;'
+    'position: fixed; top: 0; left: 0; pointer-events: none;'
   document.body && document.body.appendChild(animationLayer)
   return animationLayer
 }
@@ -73,6 +74,7 @@ class Dip extends Component<Props> {
     animationRef.style.position = 'absolute'
     animationRef.style.width = `${rect.width}px`
     animationRef.style.height = `${rect.height}px`
+    animationRef.style.transformOrigin = 'left top'
     this.animationRef = animationRef
     Dip.animationLayer.appendChild(animationRef)
     return animationRef
@@ -133,11 +135,11 @@ class Dip extends Component<Props> {
         [
           {
             ...pick(fromStyle.computedStyle, optInCssStyles),
-            transform: `translateX(${xFrom}px) translateY(${yFrom}px) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
+            transform: `translate3d(${xFrom}px, ${yFrom}px, 0) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
           },
           {
             ...pick(computedStyleTo, optInCssStyles),
-            transform: `translateX(${xTo}px) translateY(${yTo}px) scaleX(1) scaleY(1)`,
+            transform: `translate3d(${xTo}px, ${yTo}px, 0) scaleX(1) scaleY(1)`,
           },
         ],
         {
@@ -190,7 +192,6 @@ class Dip extends Component<Props> {
       element: Element = 'div',
       optInCssStyles: _ignoreOptInCssStyles_, // eslint-disable-line no-unused-vars
       render,
-      style,
       ...rest
     } = this.props
 
@@ -200,17 +201,9 @@ class Dip extends Component<Props> {
       return render({
         ...rest,
         ref: this.addRef,
-        style: {
-          ...style,
-          transformOrigin: 'left top',
-        },
       })
     return (
-      <Element
-        {...rest}
-        ref={this.addRef}
-        style={{...style, transformOrigin: 'left top'}}
-      >
+      <Element {...rest} ref={this.addRef}>
         {children}
       </Element>
     )

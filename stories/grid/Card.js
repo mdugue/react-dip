@@ -4,6 +4,7 @@ export default styled.div`
   border-radius: 3px;
   margin: 0.25rem;
   box-shadow: 0 0px 2px 0px rgba(0, 0, 0, 0.3);
+  width: calc(100vw - 0.5rem);
   max-width: 400px;
   height: 300px;
   position: relative;

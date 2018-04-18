@@ -1,8 +1,7 @@
 import React from 'react'
 import styled, {keyframes} from 'styled-components'
-import Dip from '../../src'
-import ScrollToTop from './ScrollToTop'
 import {withRouter} from 'react-router-dom'
+import Dip from '../../src'
 
 const fadeIn = keyframes`
   from {
@@ -55,12 +54,17 @@ const Detail = ({index, images, history}) => {
   return (
     <Container onClick={() => history.goBack()}>
       <Dip
+        duration={4000}
         dipId={`image-${image.id}`}
         render={({ref, ...rest}) => (
           <Image innerRef={ref} {...rest} src={image.previewImage} />
         )}
       />
-      <Title dipId={`title-${image.id}`} optInCssStyles={['color']}>
+      <Title
+        dipId={`title-${image.id}`}
+        duration={4000}
+        optInCssStyles={['color']}
+      >
         {image.author}
       </Title>
       <Dl>

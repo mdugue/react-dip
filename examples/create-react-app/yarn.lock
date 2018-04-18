@@ -5592,9 +5592,9 @@ react-dev-utils@^5.0.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
-react-dip@^0.0.3-beta.5:
-  version "0.0.3-beta.5"
-  resolved "https://registry.yarnpkg.com/react-dip/-/react-dip-0.0.3-beta.5.tgz#d0d4daaf4f76c61865555f80f87e3249534c387c"
+react-dip@^0.0.3-beta.8:
+  version "0.0.3-beta.8"
+  resolved "https://registry.yarnpkg.com/react-dip/-/react-dip-0.0.3-beta.8.tgz#900e2f798582aeef2930a804c12c3021e3fe2fa6"
 
 react-dom@^16.3.2:
   version "16.3.2"

@@ -6,7 +6,7 @@ script:
   - node --version
   - yarn --version
   - yarn build
-  - yarn test
+  - yarn test:ci
 cache:
   yarn: true
   directories:

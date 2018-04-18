@@ -31,7 +31,7 @@ export default class Loader extends Component {
   }
   render() {
     if (this.state.isLoading)
-      return <small>'loading dummy data from https://picsum.photos/ …'</small>
+      return <small>loading dummy data from https://picsum.photos/ …</small>
     return this.props.render(this.state.images)
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import {contacts} from '../data'
 import Dip from 'react-dip'
+import contacts from '../data'
 
 const List = () => (
   <section>
@@ -20,4 +20,4 @@ const List = () => (
   </section>
 )
 
-export default () => <List />
+export default List

@@ -1,8 +1,8 @@
 import React from 'react'
-import Dip from '../../src'
-import Card, {CardImage, CardTitle} from './Card'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
+import Dip from '../../src'
+import Card, {CardImage, CardTitle} from './Card'
 
 const ListContainer = styled.div`
   display: flex;
