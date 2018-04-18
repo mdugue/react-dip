@@ -1,6 +1,6 @@
 {
   "name": "react-dip",
-  "version": "0.0.3-beta.8",
+  "version": "0.0.3-beta.9",
   "description": "Simple & declarative transition animations for React",
   "main": "dist/react-dip.cjs.js",
   "jsnext:main": "dist/react-dip.esm.js",
@@ -18,7 +18,11 @@
     "test": "flow && jest",
     "test:ci": "flow && npm run lint && npm run storybook:build && jest"
   },
-  "files": ["dist", "preact", "src"],
+  "files": [
+    "dist",
+    "preact",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mdugue/react-dip.git"
@@ -77,7 +81,10 @@
       "no-eq-null": "off",
       "eqeqeq": "off",
       "react/jsx-indent": "off",
-      "complexity": ["error", 12]
+      "complexity": [
+        "error",
+        12
+      ]
     }
   },
   "eslintIgnore": [
