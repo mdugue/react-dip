@@ -30,6 +30,7 @@ type Props = {
 }
 
 function createAnimationDomLayer() {
+  if (typeof document === 'undefined') return undefined
   const animationLayer = document.createElement('div')
   animationLayer.id = 'dip-animations'
   animationLayer.style.cssText =
@@ -67,21 +68,25 @@ class Dip extends Component<Props> {
   animate = () => {}
 
   createAndAppemdAnimationRef = (ref: AnimatableElement, rect: ClientRect) => {
-    if (!ref)
-      throw Error('could not create animation Ref as ref is not defined')
+    if (!ref || Dip.animationLayer == null)
+      throw Error(
+        'could not create animation Ref as ref or animationLayer is not defined',
+      )
+    const {animationLayer} = Dip
     const animationRef: AnimatableElement = ref.cloneNode(true)
     animationRef.style.position = 'absolute'
     animationRef.style.width = `${rect.width}px`
     animationRef.style.height = `${rect.height}px`
     animationRef.style.transformOrigin = 'left top'
     this.animationRef = animationRef
-    Dip.animationLayer.appendChild(animationRef)
+    animationLayer.appendChild(animationRef)
     return animationRef
   }
 
   removeAnimationRef = () => {
     this.animationRef &&
       this.animationRef.parentNode &&
+      Dip.animationLayer &&
       Dip.animationLayer.removeChild(this.animationRef)
     this.animationRef = undefined
   }
