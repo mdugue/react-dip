@@ -64,6 +64,7 @@ const Detail = ({index, images, history}) => {
         dipId={`title-${image.id}`}
         duration={4000}
         optInCssStyles={['color']}
+        element="h1"
       >
         {image.author}
       </Title>

@@ -241,6 +241,7 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 * nested Elements
 * transitioning to elements in scrolled lists (via browser back)
 * text can get distorted
+* styles from nested queries eg: animating `h1` which is styled via `section h1` (might be fixable _a little bit_, not sure if it is worth though, as it is somehow considered bad practices anyhow?)
 
 ## Inspired by
 

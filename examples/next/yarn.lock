@@ -3255,9 +3255,9 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dip@^0.0.3-beta.8:
-  version "0.0.3-beta.8"
-  resolved "https://registry.yarnpkg.com/react-dip/-/react-dip-0.0.3-beta.8.tgz#900e2f798582aeef2930a804c12c3021e3fe2fa6"
+react-dip@^0.0.3-beta.9:
+  version "0.0.3-beta.9"
+  resolved "https://registry.yarnpkg.com/react-dip/-/react-dip-0.0.3-beta.9.tgz#264a24a127194ce7a941dfa9630dde174d031f36"
 
 react-dom@^16.3.2:
   version "16.3.2"

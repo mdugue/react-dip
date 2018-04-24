@@ -23,6 +23,13 @@ class StateSwitcher extends Component {
   }
 }
 
+const textStyle = {
+  color: 'white',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}
+
 const Comp1 = props => (
   <Dip
     style={{
@@ -32,6 +39,7 @@ const Comp1 = props => (
       left: '100px',
       position: 'relative',
       height: '100px',
+      ...textStyle,
     }}
     {...props}
   >
@@ -48,6 +56,7 @@ const Comp2 = props => (
       position: 'relative',
       height: '200px',
       borderRadius: '50%',
+      ...textStyle,
     }}
     {...props}
   >
@@ -65,6 +74,7 @@ const CompRenderProp = props => (
       position: 'relative',
       height: '200px',
       borderRadius: '50%',
+      ...textStyle,
     }}
     {...props}
     render={renderProps => <div {...renderProps}>with RenderProp</div>}

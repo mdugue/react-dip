@@ -3,6 +3,7 @@
 import React, {Component} from 'react'
 import type {Node} from 'react' // eslint-disable-line no-duplicate-imports
 import {pick} from './util'
+import {webAnimations as animate} from './animate'
 
 declare var getComputedStyle: (
   elt: Element,
@@ -14,10 +15,6 @@ export type FromType = {
   computedStyle: {},
 }
 
-export type AnimatableElement = HTMLElement & {
-  animate?: ({[string]: string} | {}[], {}) => void,
-}
-
 type Props = {
   children?: Node,
   dipId: string,
@@ -25,7 +22,7 @@ type Props = {
   easing?: string,
   element?: string,
   optInCssStyles: string[],
-  render?: ({ref: (?AnimatableElement) => void, style: {}}) => Node,
+  render?: ({ref: (?HTMLElement) => void, style: {}}) => Node,
   style?: CSSStyleDeclaration,
 }
 
@@ -34,139 +31,134 @@ function createAnimationDomLayer() {
   const animationLayer = document.createElement('div')
   animationLayer.id = 'dip-animations'
   animationLayer.style.cssText =
-    'position: fixed; top: 0; left: 0; pointer-events: none;'
+    'position: absolute; top: 0; left: 0; pointer-events: none; backfaceVisibilty: hidden;'
   document.body && document.body.appendChild(animationLayer)
   return animationLayer
 }
 
+function cloneElementWithDimensions(element: HTMLElement) {
+  const rect = element.getBoundingClientRect()
+  const clone = element.cloneNode(true)
+
+  clone.style.position = 'absolute'
+  clone.style.width = `${rect.width}px`
+  clone.style.height = `${rect.height}px`
+  clone.style.top = `${window.scrollY + rect.top}px`
+  clone.style.left = `${window.scrollX + rect.left}px`
+  clone.style.transformOrigin = 'left top'
+  clone.style.margin = '0'
+  clone.style.backfaceVisibility = 'hidden'
+
+  return {element: clone, rect}
+}
+
+function calcTransformParams(rectFrom: ClientRect, rectTo: ClientRect) {
+  const xFrom = rectFrom.left - rectTo.left
+  const yFrom = rectFrom.top - rectTo.top
+  const xTo = 0
+  const yTo = 0
+  const scaleFromX = rectFrom.width / rectTo.width
+  const scaleFromY = rectFrom.height / rectTo.height
+
+  return {xFrom, yFrom, xTo, yTo, scaleFromX, scaleFromY}
+}
+
+function calcStyleParams(
+  styleStartNode: {},
+  styleDestinationNode: {},
+  optInCssStyles: string[],
+) {
+  const styleStart = pick(styleStartNode, optInCssStyles)
+  const styleDestination = pick(styleDestinationNode, optInCssStyles)
+  return {styleStart, styleDestination}
+}
+
 class Dip extends Component<Props> {
-  fromStyle: ?FromType = Dip.getFromStyle(this.props.dipId)
-  animationRef: ?AnimatableElement
+  startNodeValues: ?FromType = Dip.getStartNodeValues(this.props.dipId)
+  animationElement: ?HTMLElement
+  rafId: ?number
 
   static animationLayer = createAnimationDomLayer()
-  static registeredNodes: {[string]: AnimatableElement} = {}
+  static registeredNodes: {[string]: HTMLElement} = {}
 
-  static unregisterFromNode = (id: string, node: ?AnimatableElement) => {
+  static unregisterStartNode = (id: string, node: ?HTMLElement) => {
     if (Dip.registeredNodes[id] === node) {
       delete Dip.registeredNodes[id]
     }
   }
-  static registerFromNode = (dipId: string, node: AnimatableElement) =>
+  static registerStartNode = (dipId: string, node: HTMLElement) =>
     (Dip.registeredNodes[dipId] = node)
 
-  static getFromStyle = (dipId: string) => {
-    const fromNode = Dip.registeredNodes[dipId]
-    if (!fromNode) return undefined
-    const computedStyle: CSSStyleDeclaration = getComputedStyle(fromNode)
+  static getStartNodeValues = (dipId: string) => {
+    const startNode = Dip.registeredNodes[dipId]
+    if (!startNode) return undefined
+    const computedStyle = getComputedStyle(startNode)
     return {
-      rect: fromNode.getBoundingClientRect(),
+      rect: startNode.getBoundingClientRect(),
       computedStyle: {...computedStyle},
     }
   }
-  ref: ?AnimatableElement
+  ref: ?HTMLElement
 
-  animate = () => {}
-
-  createAndAppemdAnimationRef = (ref: AnimatableElement, rect: ClientRect) => {
-    if (!ref || Dip.animationLayer == null)
-      throw Error(
-        'could not create animation Ref as ref or animationLayer is not defined',
-      )
+  appendAnimationRef = (element: HTMLElement) => {
+    this.animationElement = element
     const {animationLayer} = Dip
-    const animationRef: AnimatableElement = ref.cloneNode(true)
-    animationRef.style.position = 'absolute'
-    animationRef.style.width = `${rect.width}px`
-    animationRef.style.height = `${rect.height}px`
-    animationRef.style.transformOrigin = 'left top'
-    this.animationRef = animationRef
-    animationLayer.appendChild(animationRef)
-    return animationRef
+    animationLayer && animationLayer.appendChild(element)
   }
 
   removeAnimationRef = () => {
-    this.animationRef &&
-      this.animationRef.parentNode &&
+    this.animationElement &&
+      this.animationElement.parentNode &&
       Dip.animationLayer &&
-      Dip.animationLayer.removeChild(this.animationRef)
-    this.animationRef = undefined
-  }
-
-  calcTransformParams(
-    rectFrom: ClientRect,
-    rectTo: ClientRect,
-    rectIntermediate: ClientRect,
-  ) {
-    const xFrom = rectFrom.left - rectIntermediate.left
-    const yFrom = rectFrom.top - rectIntermediate.top
-    const xTo = rectTo.left - rectIntermediate.left
-    const yTo = rectTo.top - rectIntermediate.top
-    const scaleFromX = rectFrom.width / rectTo.width
-    const scaleFromY = rectFrom.height / rectTo.height
-
-    return {xFrom, yFrom, xTo, yTo, scaleFromX, scaleFromY}
+      Dip.animationLayer.removeChild(this.animationElement)
+    this.animationElement = undefined
   }
 
   componentDidMount() {
-    const {ref, fromStyle} = this
-    if (ref == null || fromStyle == null) return
+    const {ref, startNodeValues} = this
+    if (ref == null || startNodeValues == null) return
+
     const {
       easing = 'ease-out',
       duration = 200,
       optInCssStyles = [],
     } = this.props
 
-    const computedStyleTo = getComputedStyle(ref)
-    const rectTo = ref.getBoundingClientRect()
-    const animationRef = this.createAndAppemdAnimationRef(ref, rectTo)
-
     const {
-      xFrom,
-      yFrom,
-      xTo,
-      yTo,
-      scaleFromX,
-      scaleFromY,
-    } = this.calcTransformParams(
-      fromStyle.rect,
-      rectTo,
-      animationRef.getBoundingClientRect(),
+      element: animationElement,
+      rect: rectTo,
+    } = cloneElementWithDimensions(ref)
+    this.appendAnimationRef(animationElement)
+
+    const transformParams = calcTransformParams(startNodeValues.rect, rectTo)
+    const optionalStyleParams = calcStyleParams(
+      startNodeValues.computedStyle,
+      getComputedStyle(ref),
+      optInCssStyles,
     )
 
-    if (animationRef.animate) {
-      ref.style.visibility = 'hidden'
-      // $FlowFixMe
-      const animation = animationRef.animate(
-        [
-          {
-            ...pick(fromStyle.computedStyle, optInCssStyles),
-            transform: `translate3d(${xFrom}px, ${yFrom}px, 0) scaleX(${scaleFromX}) scaleY(${scaleFromY})`,
-          },
-          {
-            ...pick(computedStyleTo, optInCssStyles),
-            transform: `translate3d(${xTo}px, ${yTo}px, 0) scaleX(1) scaleY(1)`,
-          },
-        ],
-        {
-          duration,
-          easing,
-          fill: 'both',
-        },
-      )
-      animation.onfinish = () => {
-        ref.style.visibility = 'visible'
-        window.requestAnimationFrame(this.removeAnimationRef) // TODO: Check if this improves anything on iOS Safari. Remove otherwise
-      }
-    }
+    ref.style.visibility = 'hidden'
+    animate(
+      animationElement,
+      optionalStyleParams,
+      transformParams,
+      duration,
+      easing,
+    ).then(() => {
+      ref.style.visibility = 'visible'
+      this.removeAnimationRef()
+    })
   }
 
   componentWillUnmount() {
-    Dip.unregisterFromNode(this.props.dipId, this.ref)
+    Dip.unregisterStartNode(this.props.dipId, this.ref)
     this.removeAnimationRef()
+    window.cancelAnimationFrame(this.rafId)
   }
 
-  addRef = (ref: ?AnimatableElement) => {
+  addRef = (ref: ?HTMLElement) => {
     this.ref = ref
-    ref != null && Dip.registerFromNode(this.props.dipId, ref)
+    ref != null && Dip.registerStartNode(this.props.dipId, ref)
   }
 
   /**
