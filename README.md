@@ -214,9 +214,7 @@ import('web-animations-js') // We recommend dynamic imports to keep initial bund
 
 ## Examples
 
-* [Quick Start Example](https://codesandbox.io/s/20jlowo9rp)
 * [Styled Components, render Props & beautiful images](https://codesandbox.io/s/l5qlnjo1v7)
-* [With React Router and Material-UI](https://codesandbox.io/s/mmnn5k0nx8)
 
 ## Dip-WHAT???
 
@@ -246,6 +244,8 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 ## Inspired by
 
 * https://github.com/joshwcomeau/react-flip-move
+* https://github.com/fram-x/FluidTransitions/
+* https://css-tricks.com/native-like-animations-for-page-transitions-on-the-web/
 
 ## Huge Thanks to
 
