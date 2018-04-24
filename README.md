@@ -45,8 +45,10 @@ Ever wanted to implement one of those incredible designs you find on [dribble](h
   * [className, id, style, aria-..., role, etc.](#classname-id-style-aria--role-etc)
 * [Polyfill](#polyfill)
 * [Examples](#examples)
+* [How it works](#how-it-works)
+  * [Basic idea](#basic-idea)
+  * [Why a clone?](#why-a-clone)
 * [Dip-WHAT???](#dip-what)
-* [How it works (TODO)](#how-it-works-todo)
 * [Browser Compatiblity](#browser-compatiblity)
 * [Caveats (TODO)](#caveats-todo)
 * [Inspired by](#inspired-by)
@@ -216,14 +218,33 @@ import('web-animations-js') // We recommend dynamic imports to keep initial bund
 
 * [Styled Components, render Props & beautiful images](https://codesandbox.io/s/l5qlnjo1v7)
 
+## How it works
+
+### Basic idea
+
+The basic idea is the following: Every candidate for an animated transition is wrapped in a `<Dip />` Container,
+whereas potential _start_ and _destination_ elements get grouped via the same `dipId` property. Say, if you want to animnate a users name from a list to a detail view
+you'd wrap the name in both views in a `<Dip dipId={`name-${username}`}>` Container.
+
+Wrapping the Components in a `Dip`-Container does a couple of things:
+
+1.  registering the Component as a potential transition start point
+2.  checking for existing registered elements
+
+If the check for existing registered elements was successfull, we kick in the animation logic, based on the FLIP-technique:
+
+1.  we create a clone of the destination-element including it's size and position and append this clone on a proper Animation-DOM-Layer
+2.  we calculate the css transforms to position the clone at the start position and scale it to the size of the start element
+3.  we animate from _2._ to _1._, hiding the destination-Element whilst animating (currently via web-animations-api, which might change though)
+
+### Why a clone?
+
+Whilst a clone has some downsides, such as creating new DOM-Elements just for animating and possible variations in the styling if nested css selectors were used
+it gives us more freedom eg. when animating to an element which is inside of a container with `overflow: hidden`.
+
 ## Dip-WHAT???
 
 No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
-
-## How it works (TODO)
-
-* Dip-Communication, dipId, from & to
-* FLIP
 
 ## Browser Compatiblity
 
@@ -235,8 +256,6 @@ No _DEEEE-EYE-PEEE_, just **dip** your taco into some tasty salsa. 🌮
 
 ## Caveats (TODO)
 
-* Block-Elements h1 etc
-* nested Elements
 * transitioning to elements in scrolled lists (via browser back)
 * text can get distorted
 * styles from nested queries eg: animating `h1` which is styled via `section h1` (might be fixable _a little bit_, not sure if it is worth though, as it is somehow considered bad practices anyhow?)
@@ -263,11 +282,13 @@ There are tons of ideas for improving `react-dip` such as adding fine grained co
 * [x] add support for custom timing functions
 * [ ] add complex examples with renderProps, routing etc.
 * [ ] add possibility of declaring alternative components that are shown whilst animating
+* [ ] add recipie for transitioning lowres- to highres-images
 * [ ] export types for flow and typescript
 * [ ] add contributing guide lines
 * [x] add error handling for props
 * [ ] add error handling for refs
 * [x] move animation to proper element, allowing for parents with `overflow: hidden` and avoiding z-index issues
+* [ ] add Component for Fading in non-dip Elements, after / while a Dip-transions
 
 ### For some near future milestone
 
