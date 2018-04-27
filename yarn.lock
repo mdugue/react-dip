@@ -5473,9 +5473,9 @@ jsx-ast-utils@^2.0.0, jsx-ast-utils@^2.0.1:
   dependencies:
     array-includes "^3.0.3"
 
-kcd-scripts@^0.37.0:
-  version "0.37.0"
-  resolved "https://registry.yarnpkg.com/kcd-scripts/-/kcd-scripts-0.37.0.tgz#cff3abacc5dd02be4e80831f8db61ea7786f1ecf"
+kcd-scripts@^0.38.0:
+  version "0.38.0"
+  resolved "https://registry.yarnpkg.com/kcd-scripts/-/kcd-scripts-0.38.0.tgz#7a311f14963836462691faad99d1fac5f74f773e"
   dependencies:
     all-contributors-cli "^4.11.1"
     arrify "^1.0.1"
