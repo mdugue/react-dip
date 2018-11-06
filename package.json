@@ -43,7 +43,7 @@
   "homepage": "https://github.com/mdugue/react-dip#readme",
   "devDependencies": {
     "@storybook/addon-actions": "^4.0.3",
-    "@storybook/addon-links": "^3.4.2",
+    "@storybook/addon-links": "^4.0.3",
     "@storybook/addon-notes": "^3.4.2",
     "@storybook/addon-storyshots": "^3.4.2",
     "@storybook/addons": "^4.0.3",
