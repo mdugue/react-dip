@@ -8,17 +8,20 @@
     "prettier": "^1.12.1",
     "react": "^16.3.2",
     "react-dip": "^0.0.3-beta.8",
-    "react-dom": "^16.3.2",
+    "react-dom": "^16.3.3",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.1.4",
-    "web-animations-js": "^2.3.1"
+    "react-scripts": "^1.1.5",
+    "web-animations-js": "^2.3.1",
+    "snyk": "^1.114.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "flow": "flow"
+    "flow": "flow",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "browserslist": {
     "development": [
@@ -26,7 +29,13 @@
       "last 2 firefox versions",
       "last 2 edge versions"
     ],
-    "production": [">1%", "last 4 versions", "Firefox ESR", "not ie < 11"]
+    "production": [
+      ">1%",
+      "last 4 versions",
+      "Firefox ESR",
+      "not ie < 11"
+    ]
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "snyk": true
 }
