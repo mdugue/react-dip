@@ -47,7 +47,7 @@
     "@storybook/addon-notes": "^5.3.0",
     "@storybook/addon-storyshots": "^5.3.0",
     "@storybook/addons": "^5.3.0",
-    "@storybook/react": "^3.4.2",
+    "@storybook/react": "^5.3.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-jest": "^23.0.1",
